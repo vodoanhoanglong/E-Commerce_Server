@@ -41,7 +41,6 @@ public class UserResolver {
     Authentication auth;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-
     @QueryMapping
     public List<Users> getUsers(){
         try{
@@ -93,6 +92,19 @@ public class UserResolver {
             map.put("error", error.getMessage());
         }
         return map;
+    }
+
+    @QueryMapping
+    public Users getEmail(@Argument String email){
+        try{
+            if(!auth.isAuthenticated(request)){
+                throw new Error(Errors.PermissionDenied.getValue());
+            }
+            return usersRepository.findByEmail(email);
+        }catch(Error error){
+            log.error(error.getMessage());
+            return null;
+        }
     }
 }
 
