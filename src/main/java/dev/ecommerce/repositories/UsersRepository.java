@@ -11,6 +11,6 @@ public interface UsersRepository extends JpaRepository<Users, String>, JpaSpecif
     @Query("SELECT user FROM Users user WHERE user.email = ?1 AND user.status = ?2")
     Users login(String email, String status);
 
-    Users findByEmail(String email);
+    Users findByEmail(String emaill);
 
 }
