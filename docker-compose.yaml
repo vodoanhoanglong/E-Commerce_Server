@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  data:
+    image: container-registry.oracle.com/database/enterprise:21.3.0.0
+    ports:
+    - 1521:1521
+    environment:
+      ORACLE_SID: orcl
+      ORACLE_PDB: longvo
+      ORACLE_PWD: Longvo123 
+      ORACLE_CHARACTERSET: AL32UTF8
+    volumes:
+    - db_data:/var/lib/oracle/data
+    - ./scripts/docker-entrypoint-initdb.d/000_createdb.sql:/docker-entrypoint-initdb.d/000_createdb.sql
+
+volumes:
+  db_data:

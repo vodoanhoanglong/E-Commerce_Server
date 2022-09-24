@@ -16,7 +16,6 @@ public class JwtTokenProvider {
     private final Long JWT_EXPIRATION = 604800000L;
 
     public String generateToken(String userId) {
-        System.out.println("|||||||||secret: \t" + JWT_SECRET);
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + JWT_EXPIRATION);
         return Jwts.builder()
