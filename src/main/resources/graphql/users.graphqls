@@ -4,6 +4,18 @@ input FormCreateUserInput {
     password: String!
 }
 
+input FormCreateShopInput {
+    name: String!
+    address: String!
+    phoneNumber: String!
+}
+
+type FormOutputCreateShops {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
+
 type FormOutputCreateUser {
     isSuccess: Boolean!
     token: String
@@ -21,12 +33,21 @@ type User {
     password: String
 }
 
+type Shops {
+    name: String
+    address: String
+    phoneNumber: String
+}
+
 type Mutation {
     createUser(form: FormCreateUserInput!): FormOutputCreateUser
+    createShops(shopforms: FormCreateShopInput!): FormOutputCreateShops
     login(form: FormLoginInput!): FormOutputCreateUser
 }
 
 type Query {
     getUsers: [User]
     getEmail(email: String): User
+    getName(name: String): Shops
+    getShops: [Shops]
 }

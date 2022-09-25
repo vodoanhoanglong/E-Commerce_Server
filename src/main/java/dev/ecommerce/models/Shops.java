@@ -39,6 +39,16 @@ public class Shops {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
+    public Shops() {
+    }
+
+    public Shops(String id, String name, String address, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getId() {
         return this.id;
     }

@@ -1,6 +1,8 @@
 package dev.ecommerce.resolvers.auth;
 
+import dev.ecommerce.models.Shops;
 import dev.ecommerce.models.Users;
+import dev.ecommerce.repositories.ShopsRepository;
 import dev.ecommerce.repositories.UsersRepository;
 import dev.ecommerce.shared.Authentication;
 import dev.ecommerce.shared.JwtTokenProvider;
@@ -28,6 +30,8 @@ public class UserResolver {
     @Autowired
     UsersRepository usersRepository;
 
+    @Autowired
+    ShopsRepository shopsRepository;
     @Autowired
     EntityManager entityManager;
 
@@ -105,6 +109,51 @@ public class UserResolver {
             log.error(error.getMessage());
             return null;
         }
+    }
+    @QueryMapping
+    public Shops getName(@Argument String name){
+        try{
+            if(!auth.isAuthenticated(request)){
+                throw new Error(Errors.PermissionDenied.getValue());
+            }
+            return shopsRepository.findByName(name);
+        }catch(Error error){
+            log.error(error.getMessage());
+            return null;
+        }
+    }
+
+    @QueryMapping
+    public List<Shops> getShops(){
+        try{
+            if(!auth.isAuthenticated(request)){
+                throw new Error(Errors.PermissionDenied.getValue());
+            }
+            return shopsRepository.findAll().stream().toList();
+        }catch(Error error){
+            log.error(error.getMessage());
+            return null;
+        }
+    }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> createShops(@Argument FormCreateShopInput shopforms){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            UUID id = UUID.randomUUID();
+            Shops addShops = new Shops(id.toString(), shopforms.getName(), shopforms.getAddress(), shopforms.getPhoneNumber());
+            entityManager.persist(addShops);
+            map.put("isSuccess", "true");
+            map.put("token", jwtTokenProvider.generateToken(id.toString()));
+            map.put("error", null);
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
     }
 }
 

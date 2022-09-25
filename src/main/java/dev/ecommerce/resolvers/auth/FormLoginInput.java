@@ -2,6 +2,7 @@ package dev.ecommerce.resolvers.auth;
 
 public class FormLoginInput {
     private String email;
+
     private String password;
 
     public String getEmail() {
