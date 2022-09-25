@@ -49,6 +49,10 @@ public class Shops {
         this.banner = banner;
     }
 
+    public Shops() {
+
+    }
+
     public String getId() {
         return this.id;
     }

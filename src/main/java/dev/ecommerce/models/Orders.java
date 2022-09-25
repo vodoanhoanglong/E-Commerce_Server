@@ -42,6 +42,11 @@ public class Orders {
         this.quantity = quantity;
         this.discount = discount;
     }
+
+    public Orders() {
+
+    }
+
     public String getId() {
         return this.id;
     }

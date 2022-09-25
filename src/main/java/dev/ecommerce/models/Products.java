@@ -43,6 +43,10 @@ public class Products {
         this.price = price;
     }
 
+    public Products() {
+
+    }
+
     public String getId() {
         return this.id;
     }

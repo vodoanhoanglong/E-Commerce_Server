@@ -35,6 +35,11 @@ public class Categories {
         this.name = name;
         this.description= description;
     }
+
+    public Categories() {
+
+    }
+
     public String getAlias() {
         return this.alias;
     }
