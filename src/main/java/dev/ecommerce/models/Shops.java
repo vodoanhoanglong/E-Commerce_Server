@@ -39,14 +39,14 @@ public class Shops {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-    public Shops() {
-    }
 
-    public Shops(String id, String name, String address, String phoneNumber) {
+    public Shops(String id, String name, String address, String phoneNumber, String logo, String banner) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.logo= logo;
+        this.banner = banner;
     }
 
     public String getId() {

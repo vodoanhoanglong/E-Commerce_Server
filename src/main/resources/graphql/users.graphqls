@@ -2,12 +2,35 @@ input FormCreateUserInput {
     fullName: String!
     email: String!
     password: String!
+    address: String!
+    gender: String!
+    phoneNumber: String!
 }
 
 input FormCreateShopInput {
     name: String!
     address: String!
     phoneNumber: String!
+    logo: String!
+    banner: String!
+}
+
+input  FormCreateProductInput {
+    name: String!
+    description: String!
+    price: Float!
+}
+
+input  FormCreateOrderInput {
+    totalMoney: Float!
+    quantity: Int!
+    discount: Float!
+}
+
+input  FormCreateCategoriesInput {
+    alias: String!
+    name: String!
+    description: String!
 }
 
 type FormOutputCreateShops {
@@ -22,6 +45,24 @@ type FormOutputCreateUser {
     error: String
 }
 
+type FormOutputCreateProducts {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
+
+type FormOutputCreateOrders {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
+
+type FormOutputCreateCategories {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
+
 input FormLoginInput {
     email: String!
     password: String!
@@ -31,23 +72,53 @@ type User {
     fullName: String
     email: String
     password: String
+    address: String
+    gender: String
+    phoneNumber: String
 }
 
 type Shops {
     name: String
     address: String
     phoneNumber: String
+    logo: String
+    banner: String
+}
+
+type Products {
+    name: String
+    description: String
+    price: Float
+}
+
+type  Orders {
+    totalMoney: Float
+    quantity: Int
+    discount: Float
+}
+
+type  Categories {
+    alias: String
+    name : String
+    description: String
 }
 
 type Mutation {
     createUser(form: FormCreateUserInput!): FormOutputCreateUser
     createShops(shopforms: FormCreateShopInput!): FormOutputCreateShops
+    createProducts(productform: FormCreateProductInput!): FormOutputCreateProducts
+    createOrders(ordersform: FormCreateOrderInput!): FormOutputCreateOrders
+    createCategories(categoriesform: FormCreateCategoriesInput!): FormOutputCreateCategories
     login(form: FormLoginInput!): FormOutputCreateUser
 }
 
 type Query {
     getUsers: [User]
     getEmail(email: String): User
-    getName(name: String): Shops
+    getShopName(name: String): Shops
     getShops: [Shops]
+    getProducts: [Products]
+    gerProductsName(name: String): Products
+    getOrders: [Orders]
+    getCategories: [Categories]
 }

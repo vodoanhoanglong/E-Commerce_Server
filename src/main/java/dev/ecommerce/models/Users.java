@@ -47,11 +47,14 @@ public class Users {
     @Column(name = "CREATEDBY")
     private String createdBy;
 
-    public Users(String id, String email, String password, String fullName) {
+    public Users(String id, String email, String password, String fullName, String address, String gender, String phoneNumber) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.fullName = fullName;
+        this.address = address;
+        this.gender = gender;
+        this.phoneNumber = phoneNumber;
     }
 
     @Column(name = "UPDATEDBY")
