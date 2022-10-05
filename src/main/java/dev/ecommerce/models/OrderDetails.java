@@ -30,6 +30,15 @@ public class OrderDetails {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
+    public OrderDetails(String id, String orderId, String productId){
+        this.id = id;
+        this.orderId = orderId;
+        this.productId = productId;
+    }
+    public OrderDetails(){
+
+    }
+
     public String getId() {
         return this.id;
     }

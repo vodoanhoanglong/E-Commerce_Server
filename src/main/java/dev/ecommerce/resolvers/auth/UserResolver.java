@@ -17,10 +17,7 @@ import org.springframework.stereotype.Controller;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @Slf4j
@@ -35,6 +32,12 @@ public class UserResolver {
     OrdersRepository ordersRepository;
     @Autowired
     CategoriesRepository categoriesRepository;
+    @Autowired
+    ProductImagesRepository productImagesRepository;
+    @Autowired
+    OrderDetailsRepository orderDetailsRepository;
+    @Autowired
+    CategoryProductsRepository categoryProductsRepository;
     @Autowired
     EntityManager entityManager;
 
@@ -113,30 +116,6 @@ public class UserResolver {
             return null;
         }
     }
-    @QueryMapping
-    public Shops getShopName(@Argument String name){
-        try{
-            if(!auth.isAuthenticated(request)){
-                throw new Error(Errors.PermissionDenied.getValue());
-            }
-            return shopsRepository.findByName(name);
-        }catch(Error error){
-            log.error(error.getMessage());
-            return null;
-        }
-    }
-
-    public Products gerProductsName(@Argument String name){
-        try{
-            if(!auth.isAuthenticated(request)){
-                throw new Error(Errors.PermissionDenied.getValue());
-            }
-            return productsRepository.findByName(name);
-        }catch(Error error){
-            log.error(error.getMessage());
-            return null;
-        }
-    }
 
     @QueryMapping
     public List<Shops> getShops(){
@@ -190,6 +169,45 @@ public class UserResolver {
         }
     }
 
+    @QueryMapping
+    public  List<ProductImages> getImage(){
+        try {
+            if (!auth.isAuthenticated(request)){
+                throw new Error(Errors.PermissionDenied.getValue());
+            }
+            return productImagesRepository.findAll().stream().toList();
+        }catch (Error error){
+            log.error(error.getMessage());
+            return null;
+        }
+    }
+
+    @QueryMapping
+    public  List<CategoryProducts> getCategoryProduct(){
+        try {
+            if (!auth.isAuthenticated(request)){
+                throw new Error(Errors.PermissionDenied.getValue());
+            }
+            return categoryProductsRepository.findAll().stream().toList();
+        }catch (Error error){
+            log.error(error.getMessage());
+            return null;
+        }
+    }
+
+    @QueryMapping
+    public  List<OrderDetails> getDetails(){
+        try {
+            if (!auth.isAuthenticated(request)){
+                throw new Error(Errors.PermissionDenied.getValue());
+            }
+            return orderDetailsRepository.findAll().stream().toList();
+        }catch (Error error){
+            log.error(error.getMessage());
+            return null;
+        }
+    }
+
     @MutationMapping
     @Transactional
     public Map<String, String> createShops(@Argument FormCreateShopInput shopforms){
@@ -197,7 +215,8 @@ public class UserResolver {
 
         try {
             UUID id = UUID.randomUUID();
-            Shops addShops = new Shops(id.toString(), shopforms.getName(), shopforms.getAddress(), shopforms.getPhoneNumber(), shopforms.getLogo(), shopforms.getBanner());
+            Shops addShops = new Shops(id.toString(), shopforms.getName(), shopforms.getAddress(), shopforms.getPhoneNumber()
+                    , shopforms.getLogo(), shopforms.getBanner());
             entityManager.persist(addShops);
             map.put("isSuccess", "true");
             map.put("token", jwtTokenProvider.generateToken(id.toString()));
@@ -271,5 +290,91 @@ public class UserResolver {
         }
         return map;
     }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> createProductImage(@Argument FormCreateProductImageInput imageforms){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            UUID id = UUID.randomUUID();
+            ProductImages addImage = new ProductImages(id.toString(), imageforms.getUrl());
+            entityManager.persist(addImage);
+            map.put("isSuccess", "true");
+            map.put("token", jwtTokenProvider.generateToken(id.toString()));
+            map.put("error", null);
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> createCategoryProduct(@Argument FormCreateCategoryProductInput categoryproductforms){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            UUID id = UUID.randomUUID();
+            CategoryProducts addCategoryProduct = new CategoryProducts(id.toString(), categoryproductforms.getCategoryAlias(), categoryproductforms.getProductId());
+            entityManager.persist(addCategoryProduct);
+            map.put("isSuccess", "true");
+            map.put("token", jwtTokenProvider.generateToken(id.toString()));
+            map.put("error", null);
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> createOrderDetails(@Argument FormCreateOrderDetailsInput detailsforms){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            UUID id = UUID.randomUUID();
+            OrderDetails addDetails = new OrderDetails(id.toString(), detailsforms.getOrderId(), detailsforms.getProductId());
+            entityManager.persist(addDetails);
+            map.put("isSuccess", "true");
+            map.put("token", jwtTokenProvider.generateToken(id.toString()));
+            map.put("error", null);
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> updateUser(@Argument FormCreateUserInput form){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+           Optional<Users> usersFromDB = usersRepository.findById(form.getId());
+           System.out.println("||||||||\t" + usersFromDB.get().getFullName());
+           usersFromDB.get().setFullName(form.fullName);
+           usersFromDB.get().setAddress(form.address);
+           usersFromDB.get().setPassword(form.password);
+           usersFromDB.get().setPhoneNumber(form.phoneNumber);
+           usersRepository.save(usersFromDB.get());
+           map.put("fullName", usersFromDB.get().getFullName());
+           map.put("address", usersFromDB.get().getAddress());
+           map.put("password", usersFromDB.get().getPassword());
+           map.put("phoneNumber", usersFromDB.get().getPhoneNumber());
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
+
 }
 

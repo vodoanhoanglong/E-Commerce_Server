@@ -1,10 +1,11 @@
 input FormCreateUserInput {
     fullName: String!
-    email: String!
+    email: String
     password: String!
     address: String!
-    gender: String!
+    gender: String
     phoneNumber: String!
+    id: String!
 }
 
 input FormCreateShopInput {
@@ -31,6 +32,20 @@ input  FormCreateCategoriesInput {
     alias: String!
     name: String!
     description: String!
+}
+
+input  FormCreateProductImageInput{
+    url: String!
+}
+
+input  FormCreateCategoryProductInput{
+    categoryAlias: String!
+    productId: String!
+}
+
+input  FormCreatOrderDetailsInput{
+    orderId: String!
+    productId: String!
 }
 
 type FormOutputCreateShops {
@@ -63,6 +78,24 @@ type FormOutputCreateCategories {
     error: String
 }
 
+type  FormOutputCreateImage {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
+
+type  FormOutputCreateCategoryProduct {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
+
+type  FormOutputCreateOrderDetails {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
+
 input FormLoginInput {
     email: String!
     password: String!
@@ -75,6 +108,7 @@ type User {
     address: String
     gender: String
     phoneNumber: String
+    id: String
 }
 
 type Shops {
@@ -103,22 +137,41 @@ type  Categories {
     description: String
 }
 
+type Image {
+    url: String
+}
+
+type CategoryProducts {
+    categoryAlias: String
+    productId: String
+}
+
+type  OrderDetails {
+    orderId: String
+    productId: String
+}
+
 type Mutation {
     createUser(form: FormCreateUserInput!): FormOutputCreateUser
     createShops(shopforms: FormCreateShopInput!): FormOutputCreateShops
     createProducts(productform: FormCreateProductInput!): FormOutputCreateProducts
     createOrders(ordersform: FormCreateOrderInput!): FormOutputCreateOrders
     createCategories(categoriesform: FormCreateCategoriesInput!): FormOutputCreateCategories
+    createProductImage(imageforms: FormCreateProductImageInput!): FormOutputCreateImage
+    createCategoryProduct(categoryproductforms: FormCreateCategoryProductInput!): FormOutputCreateCategoryProduct
+    createOrderDetails(detailsforms: FormCreatOrderDetailsInput!): FormOutputCreateOrderDetails
     login(form: FormLoginInput!): FormOutputCreateUser
+    updateUser(form: FormCreateUserInput!): User
 }
 
 type Query {
     getUsers: [User]
     getEmail(email: String): User
-    getShopName(name: String): Shops
-    getShops: [Shops]
     getProducts: [Products]
-    gerProductsName(name: String): Products
+    getShops: [Shops]
     getOrders: [Orders]
     getCategories: [Categories]
+    getImage: [Image]
+    getCategoryProduct: [CategoryProducts]
+
 }

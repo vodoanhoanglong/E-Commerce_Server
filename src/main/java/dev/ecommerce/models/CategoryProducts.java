@@ -30,6 +30,17 @@ public class CategoryProducts {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
+    public CategoryProducts(String id,String categoryAlias, String productId){
+        this.id = id;
+        this.categoryAlias = categoryAlias;
+        this.productId = productId;
+    }
+
+    public CategoryProducts() {
+
+    }
+
+
     public String getId() {
         return this.id;
     }

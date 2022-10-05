@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShopsRepository extends JpaRepository<Shops, String>, JpaSpecificationExecutor<Shops> {
 
-    Shops findByName(String name);
 }

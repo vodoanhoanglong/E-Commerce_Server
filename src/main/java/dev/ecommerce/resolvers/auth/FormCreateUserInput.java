@@ -1,13 +1,14 @@
 package dev.ecommerce.resolvers.auth;
 
 public class FormCreateUserInput {
-    public FormCreateUserInput(String fullName, String email, String password, String address, String gender, String phoneNumber) {
+    public FormCreateUserInput(String fullName, String email, String password, String address, String gender, String phoneNumber, String id) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
         this.address = address;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
+        this.id = id;
     }
 
     public String getAddress() {
@@ -58,10 +59,19 @@ public class FormCreateUserInput {
         this.password = password;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     String fullName;
     String email;
     String password;
     String address;
     String gender;
     String phoneNumber;
+    String id;
 }

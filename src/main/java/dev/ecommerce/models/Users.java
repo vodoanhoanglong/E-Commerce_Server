@@ -56,13 +56,13 @@ public class Users {
         this.gender = gender;
         this.phoneNumber = phoneNumber;
     }
-
-    @Column(name = "UPDATEDBY")
-    private String updatedBy;
-
     public Users() {
 
     }
+    @Column(name = "UPDATEDBY")
+    private String updatedBy;
+
+
 
     public String getId() {
         return this.id;
