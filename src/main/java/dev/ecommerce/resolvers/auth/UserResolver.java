@@ -375,5 +375,87 @@ public class UserResolver {
         }
         return map;
     }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> updateShops(@Argument FormCreateShopInput shopforms){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            Optional<Shops> shopFromDB = shopsRepository.findById(shopforms.getId());
+            shopFromDB.get().setName(shopforms.name);
+            shopFromDB.get().setAddress(shopforms.address);
+            shopFromDB.get().setPhoneNumber(shopforms.phoneNumber);
+            shopsRepository.save(shopFromDB.get());
+            map.put("name", shopFromDB.get().getName());
+            map.put("address", shopFromDB.get().getAddress());
+            map.put("phoneNumber", shopFromDB.get().getPhoneNumber());
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> updateProducts(@Argument FormCreateProductInput productform){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            Optional<Products> productsFromDB = productsRepository.findById(productform.getId());
+            productsFromDB.get().setName(productform.name);
+            productsFromDB.get().setPrice(productform.price);
+            productsFromDB.get().setDescription(productform.description);
+            productsRepository.save(productsFromDB.get());
+            map.put("name", productsFromDB.get().getName());
+            map.put("description", productsFromDB.get().getDescription());
+            map.put("price", productsFromDB.get().getPrice().toString());
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> updateCategories(@Argument FormCreateCategoriesInput categoriesform){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            Optional<Categories> categoriesFromDB = categoriesRepository.findById(categoriesform.getAlias());
+            categoriesFromDB.get().setName(categoriesform.name);
+            categoriesFromDB.get().setDescription(categoriesform.description);
+            categoriesRepository.save(categoriesFromDB.get());
+            map.put("name", categoriesFromDB.get().getName());
+            map.put("description", categoriesFromDB.get().getDescription());
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> updateImages(@Argument FormCreateProductImageInput imageforms){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            Optional<ProductImages> imagesFromDB = productImagesRepository.findById(imageforms.getId());
+            imagesFromDB.get().setUrl(imageforms.url);
+            productImagesRepository.save(imagesFromDB.get());
+            map.put("url", imagesFromDB.get().getUrl());
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
 }
 

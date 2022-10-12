@@ -9,14 +9,16 @@ input FormCreateUserInput {
 }
 
 input FormCreateShopInput {
-    name: String!
-    address: String!
-    phoneNumber: String!
-    logo: String!
-    banner: String!
+    name: String
+    address: String
+    phoneNumber: String
+    logo: String
+    banner: String
+    id: String
 }
 
 input  FormCreateProductInput {
+    id: String
     name: String!
     description: String!
     price: Float!
@@ -35,6 +37,7 @@ input  FormCreateCategoriesInput {
 }
 
 input  FormCreateProductImageInput{
+    id: String
     url: String!
 }
 
@@ -162,6 +165,10 @@ type Mutation {
     createOrderDetails(detailsforms: FormCreatOrderDetailsInput!): FormOutputCreateOrderDetails
     login(form: FormLoginInput!): FormOutputCreateUser
     updateUser(form: FormCreateUserInput!): User
+    updateShops(shopforms: FormCreateShopInput!): Shops
+    updateProducts(productform: FormCreateProductInput!): Products
+    updateCategories(categoriesform: FormCreateCategoriesInput!): Categories
+    updateImages(imageforms: FormCreateProductImageInput!): Image
 }
 
 type Query {
