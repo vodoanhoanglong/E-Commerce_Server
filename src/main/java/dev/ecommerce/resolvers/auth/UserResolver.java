@@ -375,6 +375,5 @@ public class UserResolver {
         }
         return map;
     }
-asd
 }
 
