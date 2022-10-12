@@ -1,11 +1,11 @@
 input FormCreateUserInput {
-    fullName: String!
+    fullName: String
     email: String
-    password: String!
-    address: String!
+    password: String
+    address: String
     gender: String
-    phoneNumber: String!
-    id: String!
+    phoneNumber: String
+    id: String
 }
 
 input FormCreateShopInput {
@@ -19,36 +19,36 @@ input FormCreateShopInput {
 
 input  FormCreateProductInput {
     id: String
-    name: String!
-    description: String!
-    price: Float!
+    name: String
+    description: String
+    price: Float
 }
 
 input  FormCreateOrderInput {
-    totalMoney: Float!
-    quantity: Int!
-    discount: Float!
+    totalMoney: Float
+    quantity: Int
+    discount: Float
 }
 
 input  FormCreateCategoriesInput {
-    alias: String!
-    name: String!
-    description: String!
+    alias: String
+    name: String
+    description: String
 }
 
 input  FormCreateProductImageInput{
     id: String
-    url: String!
+    url: String
 }
 
 input  FormCreateCategoryProductInput{
-    categoryAlias: String!
-    productId: String!
+    categoryAlias: String
+    productId: String
 }
 
 input  FormCreatOrderDetailsInput{
-    orderId: String!
-    productId: String!
+    orderId: String
+    productId: String
 }
 
 type FormOutputCreateShops {
@@ -169,6 +169,11 @@ type Mutation {
     updateProducts(productform: FormCreateProductInput!): Products
     updateCategories(categoriesform: FormCreateCategoriesInput!): Categories
     updateImages(imageforms: FormCreateProductImageInput!): Image
+    deleteUser(form: FormCreateUserInput!): User
+    deleteShops(shopforms: FormCreateShopInput!): Shops
+    deleteProducts(productform: FormCreateProductInput!): Products
+    deleteCategories(categoriesform: FormCreateCategoriesInput!): Categories
+    deleteImages(imageforms: FormCreateProductImageInput!): Image
 }
 
 type Query {

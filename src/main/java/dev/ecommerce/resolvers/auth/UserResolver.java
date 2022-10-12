@@ -457,5 +457,85 @@ public class UserResolver {
         }
         return map;
     }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> deleteUser(@Argument FormCreateUserInput form){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            Optional<Users> usersFromDB = usersRepository.findById(form.getId());
+            usersRepository.delete(usersFromDB.get());
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> deleteShops(@Argument FormCreateShopInput shopforms){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            Optional<Shops> shopFromDB = shopsRepository.findById(shopforms.getId());
+            shopsRepository.delete(shopFromDB.get());
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> deleteProducts(@Argument FormCreateProductInput productform){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            Optional<Products> productsFromDB = productsRepository.findById(productform.getId());
+            productsRepository.delete(productsFromDB.get());
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> deleteCategories(@Argument FormCreateCategoriesInput categoriesform){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            Optional<Categories> categoriesFromDB = categoriesRepository.findById(categoriesform.getAlias());
+            categoriesRepository.delete(categoriesFromDB.get());
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
+
+    @MutationMapping
+    @Transactional
+    public Map<String, String> deleteImages(@Argument FormCreateProductImageInput imageforms){
+        HashMap<String, String> map = new HashMap<>();
+
+        try {
+            Optional<ProductImages> imagesFromDB = productImagesRepository.findById(imageforms.getId());
+            productImagesRepository.delete(imagesFromDB.get());
+        }catch (Error err){
+            map.put("isSuccess", "false");
+            map.put("token", null);
+            map.put("error", err.getMessage());
+        }
+        return map;
+    }
 }
 
