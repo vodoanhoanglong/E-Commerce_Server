@@ -19,6 +19,7 @@ type User {
     fullName: String
     email: String
     password: String
+    id: String
 }
 
 type Mutation {
