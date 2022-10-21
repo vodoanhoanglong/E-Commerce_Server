@@ -3,7 +3,7 @@ package dev.ecommerce.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "CATEGORIES", schema = "C##LONGVO")
+@Table(name = "CATEGORIES")
 public class Categories {
     @Id
     @Column(name = "ALIAS")
