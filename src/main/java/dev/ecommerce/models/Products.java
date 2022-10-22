@@ -36,6 +36,18 @@ public class Products {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
+    public Products(String id, String name, String description, Float price, Long quantityStore, String status) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantityStore = quantityStore;
+        this.status = status;
+    }
+
+    public Products(){
+    }
+
     public String getId() {
         return this.id;
     }

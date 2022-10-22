@@ -3,7 +3,18 @@ input FormCreateUserInput {
     email: String!
     password: String!
 }
-
+input  FormCreateProductsInput {
+    name:String!
+    description:String!
+    price:Float!
+    quantityStore:Int!
+    status:String!
+}
+type FormOutputCreateProducts {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
 type FormOutputCreateUser {
     isSuccess: Boolean!
     token: String
@@ -14,7 +25,15 @@ input FormLoginInput {
     email: String!
     password: String!
 }
+type Products {
+    id:String
+    name:String
+    description:String
+    price:Float
+    quantityStore:Int
+    status:String
 
+}
 type User {
     id: String
     fullName: String
@@ -25,9 +44,11 @@ type User {
 type Mutation {
     createUser(form: FormCreateUserInput!): FormOutputCreateUser
     login(form: FormLoginInput!): FormOutputCreateUser
+    createProducts(productsForm: FormCreateProductsInput!):FormOutputCreateProducts
 }
 
 type Query {
     getUsers: [User]
     getCurrentUser: User
+    getProducts: [Products]
 }
