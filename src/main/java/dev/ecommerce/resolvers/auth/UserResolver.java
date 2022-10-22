@@ -17,10 +17,7 @@ import org.springframework.stereotype.Controller;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @Slf4j
@@ -54,6 +51,19 @@ public class UserResolver {
             return null;
         }
     }
+    @QueryMapping
+    public Users getCurrentUser(){
+        try {
+            String token = request.getHeader("Authorization").split(" ")[1];
+            String ID = jwtTokenProvider.getUserIdFromJWT(token);
+            return  usersRepository.getUsersById(ID);
+        } catch (Error error){
+            log.error(error.getMessage());
+        }
+        return null;
+    }
+
+
 
     @MutationMapping
     @Transactional
@@ -80,12 +90,12 @@ public class UserResolver {
     public Map<String, String> login(@Argument FormLoginInput form){
         HashMap<String, String> map = new HashMap<>();
         try{
-            Users userInfo = usersRepository.login(form.getEmail(), StatusCode.Active.getKey());
-            if(userInfo == null || !bCryptPasswordEncoder.matches(form.getPassword(), userInfo.getPassword())){
+            Users user = usersRepository.login(form.getEmail(), StatusCode.Active.getKey());
+            if(user == null || !bCryptPasswordEncoder.matches(form.getPassword(), user.getPassword())){
                 throw new Error(Errors.UserNotFound.getValue());
             }
             map.put("isSuccess", "true");
-            map.put("token", jwtTokenProvider.generateToken(userInfo.getId()));
+            map.put("token", jwtTokenProvider.generateToken(user.getId()));
             map.put("error", null);
         }catch (Error error){
             map.put("isSuccess", "false");
