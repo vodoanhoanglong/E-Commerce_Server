@@ -42,6 +42,7 @@ public class UserResolver {
     @QueryMapping
     public List<Users> getUsers(){
         try{
+            // validate user
             if(!auth.isAuthenticated(request)){
                 throw new Error(Errors.PermissionDenied.getValue());
             }
