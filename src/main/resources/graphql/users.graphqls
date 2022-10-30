@@ -17,6 +17,11 @@ input  FormCreateOrdersInput {
     status:String!
     shopId:String!
 }
+input  FormCreateOrdersDetailsInput {
+    orderId:String!
+    productId:String!
+    status:String!
+}
 input  FormCreateShopsInput {
     name:String!
     address:String!
@@ -36,6 +41,11 @@ type FormOutputCreateUser {
     error: String
 }
 type FormOutputCreateOrders {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
+type FormOutputCreateOrdersDetails {
     isSuccess: Boolean!
     token: String
     error: String
@@ -68,6 +78,13 @@ type Orders {
     shopId:String
 
 }
+type OrdersDetails {
+    id:String
+    orderId:String
+    productId:String
+    status:String
+
+}
 type Shops {
     id:String
     name:String
@@ -90,6 +107,7 @@ type Mutation {
     login(form: FormLoginInput!): FormOutputCreateUser
     createProducts(productsForm: FormCreateProductsInput!):FormOutputCreateProducts
     createOrders(ordersForm: FormCreateOrdersInput!):FormOutputCreateOrders
+    CreateOrdersDetails(ordersDetailsForm: FormCreateOrdersDetailsInput!):FormOutputCreateOrdersDetails
     createShops(shopsForm: FormCreateShopsInput!):FormOutputCreateShops
 }
 
@@ -98,5 +116,6 @@ type Query {
     getCurrentUser: User
     getProducts: [Products]
     getOrders: [Orders]
+    getOrdersDetails: [OrdersDetails]`
     getShops: [Shops]
 }
