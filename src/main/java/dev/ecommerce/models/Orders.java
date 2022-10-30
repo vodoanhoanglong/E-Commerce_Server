@@ -36,6 +36,15 @@ public class Orders {
     @Column(name = "SHOPID")
     private String shopId;
 
+    public Orders(String id, Float totalMoney, Long quantity, Float discount, String status, String shopId) {
+        this.id = id;
+        this.totalMoney = totalMoney;
+        this.quantity = quantity;
+        this.discount = discount;
+        this.status = status;
+        this.shopId = shopId;
+    }
+    public Orders(){}
     public String getId() {
         return this.id;
     }
