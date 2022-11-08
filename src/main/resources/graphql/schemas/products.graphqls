@@ -1,0 +1,25 @@
+input paginationInput{
+    page: Int
+    size: Int
+}
+
+type Product{
+    id: String
+    name: String
+    description: String
+    price: Float
+    quantityStore: Int
+    status: String
+}
+
+type PaginationData {
+    totalElements: Int
+    currentPage: Int
+    totalPages: Int
+    perPage: Int
+}
+
+type ProductList{
+    data: [Product]
+    pagination : PaginationData
+}

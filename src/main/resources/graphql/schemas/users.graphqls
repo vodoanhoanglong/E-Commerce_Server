@@ -19,15 +19,4 @@ type User {
     id: String
     fullName: String
     email: String
-
-}
-
-type Mutation {
-    createUser(form: FormCreateUserInput!): FormOutputCreateUser
-    login(form: FormLoginInput!): FormOutputCreateUser
-}
-
-type Query {
-    getUsers: [User]
-    getCurrentUser: User
 }
