@@ -1,0 +1,21 @@
+input FormCreateProductInput {
+    id: String
+    name: String
+    description: String
+    price: Float
+    quantityStore: Int
+}
+
+type FormOutputCreateProduct {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
+
+type Products {
+    id: String
+    name: String
+    description: String
+    price: Float
+    quantityStore: Int
+}

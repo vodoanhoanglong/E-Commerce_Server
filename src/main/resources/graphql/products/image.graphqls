@@ -1,0 +1,15 @@
+input FormCreateImageInput {
+    id: String
+    url: String
+}
+
+type FormOutputCreateImage {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
+
+type Image {
+    id: String
+    url: String
+}

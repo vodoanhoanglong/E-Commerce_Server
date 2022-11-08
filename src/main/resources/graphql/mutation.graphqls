@@ -1,0 +1,7 @@
+type Mutation {
+    createProduct(productsform: FormCreateProductInput!): FormOutputCreateProduct
+    updateProducts(productsform: FormCreateProductInput!): FormOutputCreateProduct
+    createImage(imageform: FormCreateImageInput!): FormOutputCreateImage
+    updateImage(imageform: FormCreateImageInput!): FormOutputCreateImage
+}
+

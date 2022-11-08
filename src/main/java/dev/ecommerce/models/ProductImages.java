@@ -30,6 +30,15 @@ public class ProductImages {
     @Column(name = "PRODUCTID")
     private String productId;
 
+    public  ProductImages(String id, String url){
+        this.id = id;
+        this.url = url;
+    }
+
+    public ProductImages(){
+
+    }
+
     public String getId() {
         return this.id;
     }
