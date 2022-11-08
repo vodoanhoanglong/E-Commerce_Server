@@ -47,17 +47,28 @@ public class Users {
     @Column(name = "CREATEDBY")
     private String createdBy;
 
-    public Users(String id, String email, String password, String fullName) {
+    public Users() {
+    }
+
+    public Users(String id, String email, String password, String fullName, String address, String avatar, String bod
+    , String gender, String phoneNumber, String status) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.fullName = fullName;
+        this.address = address;
+        this.avatar = avatar;
+        this.bod = bod;
+        this.gender = gender;
+        this.phoneNumber = phoneNumber;
+        this.status = status;
     }
 
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-    public Users() {
+    public Users(String s, String email, String passwordHashed, String fullName, String bod, String avatar,
+                 String address, String status, String phoneNumber) {
 
     }
 

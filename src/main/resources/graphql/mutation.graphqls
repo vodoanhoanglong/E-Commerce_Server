@@ -1,0 +1,9 @@
+type Mutation {
+    createUser(form: FormCreateUserInput!): FormOutputCreateUser
+    login(form: FormLoginInput!): FormOutputCreateUser
+    updateUser(form: FormCreateUserInput!): FormOutputCreateUser
+    createCategories(categoriesform: FormCreateCategoryInput!): FormOutputCreateCategory
+    createCategoriesProduct(categoriesProductform: FormCreateCategoryProductInput!): FormOutputCreateCategoryProduct
+    updateCategories(categoriesform: FormCreateCategoryInput!): FormOutputCreateCategory
+    updateCategoriesProducts(categoriesProductform: FormCreateCategoryProductInput!): FormOutputCreateCategoryProduct
+}

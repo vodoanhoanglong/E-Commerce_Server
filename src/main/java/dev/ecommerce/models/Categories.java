@@ -30,6 +30,16 @@ public class Categories {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
+    public Categories(String alias, String name, String description){
+        this.alias = alias;
+        this.name = name;
+        this.description = description;
+    }
+
+    public Categories(){
+
+    }
+
     public String getAlias() {
         return this.alias;
     }

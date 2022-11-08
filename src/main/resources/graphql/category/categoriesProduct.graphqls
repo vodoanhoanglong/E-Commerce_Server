@@ -1,0 +1,17 @@
+input FormCreateCategoryProductInput {
+    id: String
+    categoryAlias: String
+    ProductID: String
+}
+
+type FormOutputCreateCategoryProduct {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
+
+type CategoryProduct {
+    id: String
+    categoryAlias: String
+    ProductID: String
+}

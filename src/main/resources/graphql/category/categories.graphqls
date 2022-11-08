@@ -1,0 +1,17 @@
+input FormCreateCategoryInput {
+    alias: String
+    name: String
+    description: String
+}
+
+type FormOutputCreateCategory {
+    isSuccess: Boolean!
+    token: String
+    error: String
+}
+
+type Category {
+    alias: String
+    name: String
+    description: String
+}

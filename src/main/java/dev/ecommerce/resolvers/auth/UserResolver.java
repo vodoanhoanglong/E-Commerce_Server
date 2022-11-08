@@ -74,7 +74,8 @@ public class UserResolver {
         try {
             UUID id = UUID.randomUUID();
             String passwordHashed = bCryptPasswordEncoder.encode(form.getPassword());
-            Users addUser = new Users(id.toString(), form.getEmail(), passwordHashed, form.getFullName());
+            Users addUser = new Users(id.toString(), form.getEmail(), passwordHashed, form.getFullName(), form.getAddress(),
+                    form.getAvatar(), form.getBod(), form.getGender(), form.getPhoneNumber(), form.getStatus());
             entityManager.persist(addUser);
             map.put("isSuccess", "true");
             map.put("token", jwtTokenProvider.generateToken(id.toString()));
