@@ -1,3 +1,11 @@
+directive @hasRoles(roles: [Role]!) on FIELD_DEFINITION
+
+enum Role {
+    admin,
+    user,
+    anonymous
+}
+
 input FormCreateUserInput {
     fullName: String!
     email: String!
@@ -19,15 +27,17 @@ type User {
     id: String
     fullName: String
     email: String
-
 }
 
 type Mutation {
-    createUser(form: FormCreateUserInput!): FormOutputCreateUser
-    login(form: FormLoginInput!): FormOutputCreateUser
+    createUser(form: FormCreateUserInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
+    login(form: FormLoginInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
 }
 
 type Query {
     getUsers: [User]
-    getCurrentUser: User
+    getCurrentUser: User @hasRoles(roles: [
+        user
+        admin
+    ])
 }

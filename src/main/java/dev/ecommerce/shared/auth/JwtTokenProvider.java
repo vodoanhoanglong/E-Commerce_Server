@@ -1,4 +1,4 @@
-package dev.ecommerce.shared;
+package dev.ecommerce.shared.auth;
 
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;

@@ -36,6 +36,9 @@ public class Products {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
+    @Column(name = "SHOPID")
+    private String shopId;
+
     public String getId() {
         return this.id;
     }
@@ -115,4 +118,8 @@ public class Products {
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
     }
+
+    public String getShopId() { return this.shopId; }
+
+    public void setShopId(String shopId) { this.shopId = shopId; }
 }

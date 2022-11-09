@@ -4,7 +4,7 @@ create table users
         constraint users_pk primary key,
     email       varchar2(100) unique not null
         constraint users_email_valid_check CHECK ( REGEXP_LIKE(email,
-                                                               '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$')),
+        '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$')),
     password    varchar2(500)        not null,
     fullName    varchar2(100),
     address     varchar2(500),
@@ -16,12 +16,13 @@ create table users
     createdAt   timestamp    default current_timestamp,
     updatedAt   timestamp    default current_timestamp,
     createdBy   varchar2(36),
-    updatedBy   varchar2(36)
+    updatedBy   varchar2(36),
+    role        varchar(30)  default 'user'
 );
 
 CREATE OR REPLACE TRIGGER users_trigger
     BEFORE
-        UPDATE
+UPDATE
     on users
     REFERENCING NEW AS "NEW"
     FOR EACH ROW
@@ -44,7 +45,7 @@ create table categories
 
 CREATE OR REPLACE TRIGGER categories_trigger
     BEFORE
-        UPDATE
+UPDATE
     on categories
     REFERENCING NEW AS "NEW"
     FOR EACH ROW
@@ -72,7 +73,7 @@ create table shops
 
 CREATE OR REPLACE TRIGGER shops_trigger
     BEFORE
-        UPDATE
+UPDATE
     on shops
     REFERENCING NEW AS "NEW"
     FOR EACH ROW
@@ -94,12 +95,14 @@ create table products
     createdBy     varchar2(36)
         constraint products_users_createdBy_fk references USERS (ID),
     updatedBy     varchar2(36)
-        constraint products_users_updatedBy_fk references USERS (ID)
+        constraint products_users_updatedBy_fk references USERS (ID),
+    shopId        varchar2(36)
+        constraint products_shops_shopId_fk references SHOPS (ID)
 );
 
 CREATE OR REPLACE TRIGGER products_trigger
     BEFORE
-        UPDATE
+UPDATE
     on products
     REFERENCING NEW AS "NEW"
     FOR EACH ROW
@@ -125,7 +128,7 @@ create table product_images
 
 CREATE OR REPLACE TRIGGER product_images_trigger
     BEFORE
-        UPDATE
+UPDATE
     on product_images
     REFERENCING NEW AS "NEW"
     FOR EACH ROW
@@ -153,7 +156,7 @@ create table category_products
 
 CREATE OR REPLACE TRIGGER category_products_trigger
     BEFORE
-        UPDATE
+UPDATE
     on category_products
     REFERENCING NEW AS "NEW"
     FOR EACH ROW
@@ -181,7 +184,7 @@ create table orders
 
 CREATE OR REPLACE TRIGGER orders_trigger
     BEFORE
-        UPDATE
+UPDATE
     on orders
     REFERENCING NEW AS "NEW"
     FOR EACH ROW
@@ -208,7 +211,7 @@ create table order_details
 
 CREATE OR REPLACE TRIGGER order_details_trigger
     BEFORE
-        UPDATE
+UPDATE
     on order_details
     REFERENCING NEW AS "NEW"
     FOR EACH ROW
