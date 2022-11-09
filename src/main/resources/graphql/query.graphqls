@@ -1,5 +1,6 @@
 type Query {
     getUsers: [User]
+    getShops: [Shops]
     getCurrentUser: User @hasRoles(roles: [
         user
         admin

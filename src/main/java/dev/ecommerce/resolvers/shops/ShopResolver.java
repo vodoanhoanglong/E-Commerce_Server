@@ -1,12 +1,8 @@
-package dev.ecommerce.resolvers.product;
+package dev.ecommerce.resolvers.shops;
 
-import dev.ecommerce.models.Products;
-import dev.ecommerce.models.Users;
-import dev.ecommerce.repositories.ProductImagesRepository;
-import dev.ecommerce.repositories.ProductsRepository;
-import dev.ecommerce.resolvers.auth.FormCreateUserInput;
+import dev.ecommerce.models.Shops;
+import dev.ecommerce.repositories.ShopsRepository;
 import dev.ecommerce.shared.auth.Authentication;
-import dev.ecommerce.shared.auth.JwtTokenProvider;
 import dev.ecommerce.shared.auth.JwtTokenProvider;
 import dev.ecommerce.shared.resources.Errors;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import javax.persistence.EntityManager;
@@ -27,13 +22,9 @@ import java.util.UUID;
 
 @Controller
 @Slf4j
-public class ProductsResolver {
+public class ShopResolver {
     @Autowired
-    ProductsRepository productsRepository;
-
-    @Autowired
-    ProductImagesRepository productImagesRepository;
-
+    private ShopsRepository shopsRepository;
     @Autowired
     EntityManager entityManager;
 
@@ -44,39 +35,32 @@ public class ProductsResolver {
     JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    Authentication auth;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    Authentication shop;
 
     @QueryMapping
-    public List<Products> getProducts(){
+    public List<Shops> getShops(){
         try{
-            if(!auth.isAuthenticated(request)){
+            if(!shop.isAuthenticated(request)){
                 throw new Error(Errors.PermissionDenied.getValue());
             }
-            return productsRepository.findAll().stream().toList();
+            return shopsRepository.findAll().stream().toList();
         }catch(Error error){
             log.error(error.getMessage());
             return null;
         }
     }
-
-
     @MutationMapping
     @Transactional
-    public Map<String, String> createProducts(@Argument FormCreateProducts productsForm){
+    public Map<String, String> createShops(@Argument FormCreateShopsInput shopsForm){
         HashMap<String, String> map = new HashMap<>();
 
         try {
             UUID id = UUID.randomUUID();
-            Products addProducts = new Products(id.toString(), productsForm.getName(), productsForm.getDescription(), productsForm.getPrice(),productsForm.getQuantityStore(),productsForm.getStatus());
-            entityManager.persist(addProducts);
-            map.put("isSuccess", "true");
+            Shops addShops = new Shops(id.toString(), shopsForm.getName(), shopsForm.getAddress(), shopsForm.getPhoneNumber(),shopsForm.getLogo(),shopsForm.getBanner(), shopsForm.getStatus());
+            entityManager.persist(addShops);
             map.put("token", jwtTokenProvider.generateToken(id.toString()));
-            map.put("error", null);
         }catch (Error err){
-            map.put("isSuccess", "false");
             map.put("token", null);
-            map.put("error", err.getMessage());
         }
         return map;
     }
