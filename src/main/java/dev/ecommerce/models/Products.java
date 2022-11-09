@@ -36,7 +36,6 @@ public class Products {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-<<<<<<< HEAD
     public Products(String id, String name, String description, Float price, Long quantityStore, String status) {
         this.id = id;
         this.name = name;
@@ -48,10 +47,8 @@ public class Products {
 
     public Products(){
     }
-=======
     @Column(name = "SHOPID")
     private String shopId;
->>>>>>> 0901a7881d8d846026bb2e582b77116e45e8fd7a
 
     public String getId() {
         return this.id;
