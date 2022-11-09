@@ -4,4 +4,5 @@ type Query {
         user
         admin
     ])
+    getProducts(paginate: paginationInput):ProductListResData @hasRoles(roles: [admin user anonymous])
 }

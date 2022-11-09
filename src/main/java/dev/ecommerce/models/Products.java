@@ -39,6 +39,17 @@ public class Products {
     @Column(name = "SHOPID")
     private String shopId;
 
+    public Products() {
+    }
+
+    public Products(String id, String name, String description, Float price, Long quantityStore) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantityStore = quantityStore;
+    }
+
     public String getId() {
         return this.id;
     }
@@ -119,7 +130,11 @@ public class Products {
         this.updatedBy = updatedBy;
     }
 
-    public String getShopId() { return this.shopId; }
+    public String getShopId() {
+        return this.shopId;
+    }
 
-    public void setShopId(String shopId) { this.shopId = shopId; }
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
 }

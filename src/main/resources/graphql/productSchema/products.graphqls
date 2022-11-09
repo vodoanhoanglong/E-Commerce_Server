@@ -1,0 +1,21 @@
+input ProductReqBody {
+    name: String
+    description: String
+    price: Float
+}
+type Product{
+    id: String
+    name: String
+    description: String
+    price: Float
+    quantityStore: Int
+    status: String
+}
+type ProductListResData{
+    data: [Product]
+    pagination : PaginationData
+}
+type ProductResData {
+    data: Product
+    message: String!
+}
