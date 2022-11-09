@@ -1,0 +1,7 @@
+type Query {
+    getUsers: [User]
+    getCurrentUser: User @hasRoles(roles: [
+        user
+        admin
+    ])
+}
