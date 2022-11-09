@@ -1,6 +1,8 @@
-package dev.ecommerce;
+package dev.ecommerce.shared.config;
 
+import dev.ecommerce.shared.auth.HasRolesDirective;
 import org.springframework.context.annotation.Bean;
+import org.springframework.graphql.execution.RuntimeWiringConfigurer;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -17,5 +19,10 @@ public class Configuration {
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/graphql/**", config);
         return new CorsFilter(source);
+    }
+
+    @Bean
+    public RuntimeWiringConfigurer runtimeWiringConfigurer() {
+        return builder -> builder.directiveWiring(new HasRolesDirective());
     }
 }

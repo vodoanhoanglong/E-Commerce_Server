@@ -1,4 +1,4 @@
-package dev.ecommerce.shared;
+package dev.ecommerce.shared.auth;
 
 import dev.ecommerce.shared.resources.Headers;
 import org.jetbrains.annotations.NotNull;

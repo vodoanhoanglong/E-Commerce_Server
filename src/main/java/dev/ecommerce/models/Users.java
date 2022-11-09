@@ -34,6 +34,10 @@ public class Users {
     private String phoneNumber;
 
     @GeneratedValue
+    @Column(name = "ROLE", insertable = false)
+    private String role;
+
+    @GeneratedValue
     @Column(name = "STATUS", insertable = false)
     private String status;
     @GeneratedValue
@@ -83,6 +87,14 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return this.role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getFullName() {
