@@ -1,10 +1,11 @@
 type Mutation {
     createUser(form: FormCreateUserInput!): FormOutputCreateUser
     login(form: FormLoginInput!): FormOutputCreateUser
+    createNewProduct(product: ProductReqBody!): ProductResData
 }
 
 type Query {
     getUsers: [User]
     getCurrentUser: User
-    getProducts(paginate: paginationInput):ProductList
+    getProducts(paginate: paginationInput):ProductListResData
 }

@@ -3,6 +3,12 @@ input paginationInput{
     size: Int
 }
 
+input ProductReqBody {
+    name: String
+    description: String
+    price: Float
+}
+
 type Product{
     id: String
     name: String
@@ -19,7 +25,11 @@ type PaginationData {
     perPage: Int
 }
 
-type ProductList{
+type ProductListResData{
     data: [Product]
     pagination : PaginationData
+}
+type ProductResData {
+    data: Product
+    message: String!
 }
