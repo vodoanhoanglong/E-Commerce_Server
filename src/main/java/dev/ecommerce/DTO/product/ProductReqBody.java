@@ -1,16 +1,18 @@
-package dev.ecommerce.DTO;
+package dev.ecommerce.DTO.product;
+
+import java.util.List;
 
 public class ProductReqBody {
     private String name;
     private String description;
     private float price;
-//    private List<String> imageList;
+    private List<String> images;
 
-    public ProductReqBody(String name, String description, float price) {
+    public ProductReqBody(String name, String description, float price, List<String> images) {
         this.name = name;
         this.description = description;
         this.price = price;
-//        this.imageList = imageList;
+        this.images = images;
     }
 
     public String getName() {
@@ -35,5 +37,13 @@ public class ProductReqBody {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 }

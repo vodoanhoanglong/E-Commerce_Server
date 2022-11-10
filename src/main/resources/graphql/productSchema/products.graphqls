@@ -1,21 +1,32 @@
 input ProductReqBody {
-    name: String
-    description: String
-    price: Float
+    name: String!
+    description: String!
+    price: Float!
+    images: [String]
+}
+type Image{
+    id: String
+    url: String
+    createdBy: String
 }
 type Product{
     id: String
     name: String
     description: String
+    images: [Image]
     price: Float
     quantityStore: Int
-    status: String
+    createdBy: String
+    updatedBy: String
+    shopID: String
 }
+
+
 type ProductListResData{
     data: [Product]
     pagination : PaginationData
 }
-type ProductResData {
+type ProductMutationResData {
     data: Product
     message: String!
 }
