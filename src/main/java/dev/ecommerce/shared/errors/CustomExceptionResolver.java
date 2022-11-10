@@ -7,13 +7,14 @@ import graphql.schema.DataFetchingEnvironment;
 import org.springframework.graphql.execution.DataFetcherExceptionResolverAdapter;
 import org.springframework.graphql.execution.ErrorType;
 import org.springframework.stereotype.Component;
+import javax.validation.ConstraintViolationException;
 
 @Component
 public class CustomExceptionResolver extends DataFetcherExceptionResolverAdapter {
 
     @Override
     protected GraphQLError resolveToSingleError(Throwable ex, DataFetchingEnvironment env) {
-        if (ex instanceof CustomMessageError) {
+        if (ex instanceof CustomMessageError || ex instanceof ConstraintViolationException) {
             return GraphqlErrorBuilder.newError()
                     .errorType(ErrorType.UNAUTHORIZED)
                     .message(ex.getMessage())
