@@ -1,4 +1,4 @@
-package dev.ecommerce.DTO.product;
+package dev.ecommerce.resolvers.product.schema;
 
 import java.util.List;
 

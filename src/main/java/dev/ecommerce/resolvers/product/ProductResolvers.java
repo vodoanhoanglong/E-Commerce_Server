@@ -1,12 +1,12 @@
 package dev.ecommerce.resolvers.product;
 
-import dev.ecommerce.DTO.PaginationInput;
-import dev.ecommerce.DTO.product.ProductReqBody;
+import dev.ecommerce.resolvers.product.schema.PaginationInput;
+import dev.ecommerce.resolvers.product.schema.ProductReqBody;
 import dev.ecommerce.models.ProductImages;
 import dev.ecommerce.models.Products;
 import dev.ecommerce.repositories.ProductImagesRepository;
 import dev.ecommerce.repositories.ProductsRepository;
-import dev.ecommerce.DTO.PaginationData;
+import dev.ecommerce.resolvers.product.schema.PaginationData;
 import dev.ecommerce.repositories.ShopsRepository;
 import dev.ecommerce.shared.auth.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;

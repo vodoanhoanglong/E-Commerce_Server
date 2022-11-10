@@ -1,4 +1,4 @@
-package dev.ecommerce.DTO;
+package dev.ecommerce.resolvers.product.schema;
 
 public class PaginationData {
     private long totalElements;
