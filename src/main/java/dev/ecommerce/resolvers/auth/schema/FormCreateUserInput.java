@@ -1,4 +1,6 @@
-package dev.ecommerce.resolvers.auth;
+package dev.ecommerce.resolvers.auth.schema;
+
+import javax.validation.constraints.*;
 
 public class FormCreateUserInput {
     public FormCreateUserInput(String fullName, String email, String password) {
@@ -31,7 +33,19 @@ public class FormCreateUserInput {
         this.password = password;
     }
 
-    String fullName;
-    String email;
-    String password;
+    @NotBlank
+    @NotNull
+    @NotEmpty
+    private String fullName;
+
+    @NotBlank
+    @NotNull
+    @NotEmpty
+    @Email
+    private String email;
+
+    @NotNull
+    @NotEmpty
+    @NotBlank
+    private String password;
 }

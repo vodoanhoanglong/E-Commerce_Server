@@ -7,8 +7,7 @@ input FormCreateUserInput {
 
 type FormOutputCreateUser {
     isSuccess: Boolean!
-    token: String
-    error: String
+    token: String!
 }
 
 input FormLoginInput {
