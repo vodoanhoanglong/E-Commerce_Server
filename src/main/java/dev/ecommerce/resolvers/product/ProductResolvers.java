@@ -4,11 +4,13 @@ import dev.ecommerce.resolvers.product.schema.PaginationInput;
 import dev.ecommerce.resolvers.product.schema.ProductReqBody;
 import dev.ecommerce.models.ProductImages;
 import dev.ecommerce.models.Products;
+import dev.ecommerce.shared.errors.CustomMessageError;
 import dev.ecommerce.repositories.ProductImagesRepository;
 import dev.ecommerce.repositories.ProductsRepository;
 import dev.ecommerce.resolvers.product.schema.PaginationData;
 import dev.ecommerce.repositories.ShopsRepository;
 import dev.ecommerce.shared.auth.JwtTokenProvider;
+import dev.ecommerce.shared.resources.Errors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -60,37 +62,35 @@ public class ProductResolvers {
 
     @MutationMapping
     public Map<String, Object> createNewProduct(@Argument ProductReqBody product) {
-        Map<String, Object> res = new HashMap<>();
-        String token = request.getHeader("Authorization").split(" ")[1];
-        String userID = jwtTokenProvider.getUserIdFromJWT(token);
-        String shopID = shopsRepository.getShopsByCreatedBy(userID).getId();
         try {
+            Map<String, Object> res = new HashMap<>();
+            String token = request.getHeader("Authorization").split(" ")[1];
+            String userID = jwtTokenProvider.getUserIdFromJWT(token);
+            String shopID = shopsRepository.getShopsByCreatedBy(userID).getId();
             Products duplicate = productsRepository.findProductsByName(product.getName());
             if (duplicate != null) {
-                res.put("message", "Sản phầm đã tồn tại!");
-            } else {
-                UUID id = UUID.randomUUID();
-                String name = product.getName();
-                String desc = product.getDescription();
-                Float price = product.getPrice();
-                Products newProduct = productsRepository.save(new Products(String.valueOf(id), name, desc, price, 0L, userID, shopID));
-                List<String> imagesUrls = product.getImages();
-                if (imagesUrls != null && !imagesUrls.isEmpty()) {
-                    List<ProductImages> images = new ArrayList<>();
-                    imagesUrls.forEach(url -> {
-                        UUID imageID = UUID.randomUUID();
-                        ProductImages newImage = productImagesRepository.save(new ProductImages(String.valueOf(imageID), url, String.valueOf(id), String.valueOf(userID)));
-                        images.add(newImage);
-                    });
-                    newProduct.setImages(images);
-                }
-                res.put("data", newProduct);
-                res.put("message", "Successfully!");
+                throw new Error(Errors.ProductAlreadyExist.getValue());
             }
-
+            UUID id = UUID.randomUUID();
+            String name = product.getName();
+            String desc = product.getDescription();
+            Float price = product.getPrice();
+            Products newProduct = productsRepository.save(new Products(String.valueOf(id), name, desc, price, 0L, userID, shopID));
+            List<String> imagesUrls = product.getImages();
+            if (imagesUrls != null && !imagesUrls.isEmpty()) {
+                List<ProductImages> images = new ArrayList<>();
+                imagesUrls.forEach(url -> {
+                    UUID imageID = UUID.randomUUID();
+                    ProductImages newImage = productImagesRepository.save(new ProductImages(String.valueOf(imageID), url, String.valueOf(id), String.valueOf(userID)));
+                    images.add(newImage);
+                });
+                newProduct.setImages(images);
+            }
+            res.put("data", newProduct);
+            res.put("message", "Successfully!");
+            return res;
         } catch (Error error) {
-            res.put("message", error.getMessage());
+            throw new CustomMessageError(error.getMessage());
         }
-        return res;
     }
 }
