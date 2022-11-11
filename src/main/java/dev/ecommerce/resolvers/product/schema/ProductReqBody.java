@@ -1,10 +1,14 @@
 package dev.ecommerce.resolvers.product.schema;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 public class ProductReqBody {
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String description;
+    @NotEmpty
     private float price;
     private List<String> images;
 

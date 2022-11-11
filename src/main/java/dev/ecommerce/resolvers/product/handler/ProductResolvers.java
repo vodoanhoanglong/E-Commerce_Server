@@ -22,6 +22,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -58,7 +59,7 @@ public class ProductResolvers {
     }
 
     @MutationMapping
-    public Map<String, Object> createNewProduct(GraphQLContext graphQLContext, @Argument ProductReqBody product) {
+    public Map<String, Object> createNewProduct(GraphQLContext graphQLContext, @Argument @Valid ProductReqBody product) {
         try {
             Map<String, Object> res = new HashMap<>();
             Users currentUser = graphQLContext.get(Headers.CurrentUser.getValue());
