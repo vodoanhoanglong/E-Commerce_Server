@@ -1,6 +1,8 @@
 package dev.ecommerce.models;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "PRODUCTS")
@@ -39,8 +41,25 @@ public class Products {
     @Column(name = "SHOPID")
     private String shopId;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "PRODUCTID")
+    private List<ProductImages> images;
+
+    public Products() {
+    }
+
+    public Products(String id, String name, String description, Float price, Long quantityStore, String createdBy, String shopId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.quantityStore = quantityStore;
+        this.createdBy = createdBy;
+        this.shopId = shopId;
+    }
+
     public String getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(String id) {
@@ -48,7 +67,7 @@ public class Products {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
@@ -56,7 +75,7 @@ public class Products {
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {
@@ -64,7 +83,7 @@ public class Products {
     }
 
     public Float getPrice() {
-        return this.price;
+        return price;
     }
 
     public void setPrice(Float price) {
@@ -72,7 +91,7 @@ public class Products {
     }
 
     public Long getQuantityStore() {
-        return this.quantityStore;
+        return quantityStore;
     }
 
     public void setQuantityStore(Long quantityStore) {
@@ -80,31 +99,31 @@ public class Products {
     }
 
     public String getStatus() {
-        return this.status;
+        return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
-    public java.sql.Timestamp getCreatedAt() {
-        return this.createdAt;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatedAt(java.sql.Timestamp createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public java.sql.Timestamp getUpdatedAt() {
-        return this.updatedAt;
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdatedAt(java.sql.Timestamp updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 
     public String getCreatedBy() {
-        return this.createdBy;
+        return createdBy;
     }
 
     public void setCreatedBy(String createdBy) {
@@ -112,14 +131,26 @@ public class Products {
     }
 
     public String getUpdatedBy() {
-        return this.updatedBy;
+        return updatedBy;
     }
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
     }
 
-    public String getShopId() { return this.shopId; }
+    public String getShopId() {
+        return shopId;
+    }
 
-    public void setShopId(String shopId) { this.shopId = shopId; }
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
+
+    public List<ProductImages> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ProductImages> images) {
+        this.images = images;
+    }
 }

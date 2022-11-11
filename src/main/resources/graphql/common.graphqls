@@ -5,3 +5,15 @@ enum Role {
     user,
     anonymous
 }
+
+input PaginationInput{
+    page: Int
+    size: Int
+}
+
+type PaginationData {
+    totalElements: Int
+    currentPage: Int
+    totalPages: Int
+    perPage: Int
+}
