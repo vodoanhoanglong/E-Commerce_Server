@@ -1,4 +1,4 @@
-package dev.ecommerce.resolvers.product.schema;
+package dev.ecommerce.shared.schemas;
 
 
 public class PaginationInput {

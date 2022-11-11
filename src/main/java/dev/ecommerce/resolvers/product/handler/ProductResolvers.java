@@ -1,16 +1,15 @@
-package dev.ecommerce.resolvers.product;
+package dev.ecommerce.resolvers.product.handler;
 
 import dev.ecommerce.models.Users;
-import dev.ecommerce.resolvers.product.schema.PaginationInput;
+import dev.ecommerce.shared.schemas.PaginationInput;
 import dev.ecommerce.resolvers.product.schema.ProductReqBody;
 import dev.ecommerce.models.ProductImages;
 import dev.ecommerce.models.Products;
 import dev.ecommerce.shared.errors.CustomMessageError;
 import dev.ecommerce.repositories.ProductImagesRepository;
 import dev.ecommerce.repositories.ProductsRepository;
-import dev.ecommerce.resolvers.product.schema.PaginationData;
+import dev.ecommerce.shared.schemas.PaginationData;
 import dev.ecommerce.repositories.ShopsRepository;
-import dev.ecommerce.shared.auth.JwtTokenProvider;
 import dev.ecommerce.shared.resources.Errors;
 import dev.ecommerce.shared.resources.Headers;
 import graphql.GraphQLContext;
@@ -23,7 +22,6 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Controller
