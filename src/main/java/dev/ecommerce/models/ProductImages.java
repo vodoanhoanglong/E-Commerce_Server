@@ -30,6 +30,15 @@ public class ProductImages {
     @Column(name = "PRODUCTID")
     private String productId;
 
+    public ProductImages() {
+    }
+    public ProductImages(String id, String url, String productId, String createdBy) {
+        this.id = id;
+        this.url = url;
+        this.productId = productId;
+        this.createdBy = createdBy;
+    }
+
     public String getId() {
         return this.id;
     }

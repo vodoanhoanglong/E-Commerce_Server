@@ -1,7 +1,17 @@
-package dev.ecommerce.resolvers.auth;
+package dev.ecommerce.resolvers.auth.schema;
 
-public class FormLoginInput {
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
+public class  FormLoginInput {
+    @NotBlank
+    @NotEmpty
+    @Email
     private String email;
+
+    @NotBlank
+    @NotEmpty
     private String password;
 
     public String getEmail() {

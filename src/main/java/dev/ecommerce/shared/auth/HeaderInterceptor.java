@@ -1,4 +1,4 @@
-package dev.ecommerce.shared.config;
+package dev.ecommerce.shared.auth;
 
 import dev.ecommerce.models.Users;
 import dev.ecommerce.repositories.UsersRepository;
@@ -29,21 +29,18 @@ public class HeaderInterceptor implements WebGraphQlInterceptor {
         final HttpHeaders headers = request.getHeaders();
         Map<String, List<String>> data = new HashMap<>(headers);
 
-        String role = Roles.ANONYMOUS.getValue();
+        Users currentUser = new Users();
         List<String> authorization = data.get(Headers.Authorization.getKey());
 
-        if(authorization != null){
+        if(authorization != null && !authorization.get(0).isEmpty()){
             String token = authorization.get(0).split(" ")[1];
             String userId = jwtTokenProvider.getUserIdFromJWT(token);
-            Users currentUser = usersRepository.getUsersById(userId);
-            if(currentUser != null && currentUser.getRole() != null){
-                role = currentUser.getRole();
-            }
+            currentUser = usersRepository.getUsersById(userId);
         }
 
-        String finalRole = role;
+        Users finalCurrentUser = currentUser;
         request.configureExecutionInput((executionInput, builder) -> builder.graphQLContext(
-                Collections.singletonMap("role", finalRole)).build()
+                Collections.singletonMap(Headers.CurrentUser.getValue(), finalCurrentUser)).build()
         );
         return chain.next(request);
     }
