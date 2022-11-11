@@ -6,7 +6,7 @@ enum Role {
     anonymous
 }
 
-input paginationInput{
+input PaginationInput{
     page: Int
     size: Int
 }

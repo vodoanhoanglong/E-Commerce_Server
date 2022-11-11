@@ -22,11 +22,11 @@ type Product{
 }
 
 
-type ProductListResData{
+type ProductListRes{
     data: [Product]
     pagination : PaginationData
 }
-type ProductMutationResData {
+type ProductMutationRes {
     data: Product
     message: String!
 }
