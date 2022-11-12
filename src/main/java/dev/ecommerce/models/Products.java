@@ -47,8 +47,6 @@ public class Products {
         this.status = status;
     }
 
-    public Products(){
-    }
     @Column(name = "SHOPID")
     private String shopId;
 
