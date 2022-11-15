@@ -136,34 +136,6 @@ begin
     :NEW.updatedAt := current_timestamp;
 end;
 
-
-create table category_products
-(
-    id            varchar2(36) not null
-        constraint category_products_pk primary key,
-    categoryAlias varchar2(100)
-        constraint category_products_categories_categoryAlias_fk references CATEGORIES (ALIAS),
-    productId     varchar2(36)
-        constraint category_products_products_productId_fk references PRODUCTS (ID),
-    status        varchar2(20) default 'active',
-    createdAt     timestamp    default current_timestamp,
-    updatedAt     timestamp    default current_timestamp,
-    createdBy     varchar2(36)
-        constraint category_products_users_createdBy_fk references USERS (ID),
-    updatedBy     varchar2(36)
-        constraint category_products_users_updatedBy_fk references USERS (ID)
-);
-
-CREATE OR REPLACE TRIGGER category_products_trigger
-    BEFORE
-UPDATE
-    on category_products
-    REFERENCING NEW AS "NEW"
-    FOR EACH ROW
-begin
-    :NEW.updatedAt := current_timestamp;
-end;
-
 create table orders
 (
     id         varchar2(36) not null
