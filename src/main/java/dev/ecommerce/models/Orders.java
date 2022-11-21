@@ -1,6 +1,7 @@
 package dev.ecommerce.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ORDERS")
@@ -35,6 +36,21 @@ public class Orders {
 
     @Column(name = "SHOPID")
     private String shopId;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "CREATEDBY")
+    private List<Users> users;
+
+    public Orders (String id, Float totalMoney, Float discount, Long quantity){
+            this.id = id;
+            this.totalMoney = totalMoney;
+            this.discount = discount;
+            this.quantity = quantity;
+    }
+
+    public Orders (){
+
+    }
 
     public String getId() {
         return this.id;

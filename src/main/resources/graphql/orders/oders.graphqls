@@ -1,0 +1,20 @@
+
+input FormCreateOrderInput {
+    totalMoney: Float!
+    quantity: Float!
+    discount: Float
+}
+
+type FormOutputCreateOrder {
+    isSuccess: Boolean!
+    totalMoney: Float!
+    quantity: Float!
+    discount: Float!
+
+}
+
+type Order {
+    totalMoney: Float
+    quantity: Float
+    discount: Float
+}
