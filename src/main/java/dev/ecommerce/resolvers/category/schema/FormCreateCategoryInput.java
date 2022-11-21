@@ -1,6 +1,9 @@
 package dev.ecommerce.resolvers.category.schema;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class FormCreateCategoryInput {
@@ -34,11 +37,10 @@ public class FormCreateCategoryInput {
         this.description = description;
     }
 
-    @NotBlank
-    @NotNull
+
+    @NotEmpty
     String alias;
-    @NotBlank
-    @NotNull
+    @NotEmpty
     String name;
     String description;
 }

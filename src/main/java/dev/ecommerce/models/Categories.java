@@ -7,10 +7,10 @@ import java.util.List;
 @Table(name = "CATEGORIES")
 public class Categories {
     @Id
-    @Column(name = "ALIAS")
+    @Column(name = "ALIAS", unique = true)
     private String alias;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", unique = true)
     private String name;
 
     @Column(name = "DESCRIPTION")

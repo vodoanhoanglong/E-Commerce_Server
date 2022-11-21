@@ -1,6 +1,7 @@
 package dev.ecommerce.resolvers.category.handler;
 
 import dev.ecommerce.models.Categories;
+import dev.ecommerce.models.Products;
 import dev.ecommerce.repositories.CategoriesRepository;
 import dev.ecommerce.resolvers.category.schema.FormCreateCategoryInput;
 import dev.ecommerce.shared.auth.JwtTokenProvider;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +39,8 @@ public class CategoryResolver {
     public Map<String, Object> createCategory(@Argument @Valid FormCreateCategoryInput form){
         try {
             HashMap<String, Object> category = new HashMap<>();
-            if (category != null) {
+            Categories duplicate = categoriesRepository.findCategoryByAlias(form.getAlias());
+            if (duplicate != null) {
                 throw new Error(Errors.CategoriesAlreadyExist.getValue());
             }
             Categories addCategory = new Categories(form.getAlias(), form.getName()
@@ -61,7 +64,7 @@ public class CategoryResolver {
 
     @MutationMapping
     @Transactional
-    public Map<String, String> updateCategory(@Argument FormCreateCategoryInput form){
+    public Map<String, String> updateCategory(@Argument @Valid FormCreateCategoryInput form){
         HashMap<String, String> category = new HashMap<>();
 
         try {
