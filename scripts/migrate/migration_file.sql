@@ -32,9 +32,9 @@ end;
 
 create table categories
 (
-    alias       varchar2(100) not null
+    alias       varchar2(100) unique not null
         constraint categories_pk primary key,
-    name        varchar2(200),
+    name        varchar2(200) unique,
     description varchar2(500),
     status      varchar2(20) default 'active',
     createdAt   timestamp    default current_timestamp,
