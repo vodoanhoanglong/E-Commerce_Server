@@ -39,8 +39,8 @@ public class CategoryResolver {
     public Map<String, Object> createCategory(@Argument @Valid FormCreateCategoryInput form){
         try {
             HashMap<String, Object> category = new HashMap<>();
-            Categories duplicate = categoriesRepository.findCategoryByAlias(form.getAlias());
-            if (duplicate != null) {
+            Categories isExisted = categoriesRepository.findCategoryByAlias(form.getAlias());
+            if (isExisted != null) {
                 throw new Error(Errors.CategoriesAlreadyExist.getValue());
             }
             Categories addCategory = new Categories(form.getAlias(), form.getName()
