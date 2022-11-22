@@ -9,10 +9,10 @@ public class ProductReqBody {
     @NotEmpty
     private String description;
     @NotEmpty
-    private float price;
+    private Float price;
     private List<String> images;
 
-    public ProductReqBody(String name, String description, float price, List<String> images) {
+    public ProductReqBody(String name, String description, Float price, List<String> images) {
         this.name = name;
         this.description = description;
         this.price = price;

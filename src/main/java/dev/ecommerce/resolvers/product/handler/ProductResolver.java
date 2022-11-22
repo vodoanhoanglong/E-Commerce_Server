@@ -1,6 +1,7 @@
 package dev.ecommerce.resolvers.product.handler;
 
 import dev.ecommerce.models.Users;
+import dev.ecommerce.resolvers.product.schema.ProductQtyReqBody;
 import dev.ecommerce.shared.helpers.Data;
 import dev.ecommerce.shared.resources.Responses;
 import dev.ecommerce.shared.schemas.PaginationInput;
@@ -15,6 +16,7 @@ import dev.ecommerce.repositories.ShopsRepository;
 import dev.ecommerce.shared.resources.Errors;
 import dev.ecommerce.shared.resources.Headers;
 import graphql.GraphQLContext;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +30,7 @@ import javax.validation.Valid;
 import java.util.*;
 
 @Controller
+@Slf4j
 public class ProductResolver {
     @Autowired
     ProductsRepository productsRepository;
@@ -86,7 +89,25 @@ public class ProductResolver {
             res.put(Responses.Message.getKey(), "Successfully!");
             return res;
         } catch (Error error) {
+            log.error(error.getMessage());
             throw new CustomMessageError(error.getMessage());
         }
     }
+
+    @MutationMapping
+    public Map<String, Object> updateProductStock(@Argument @Valid ProductQtyReqBody data) {
+        try {
+            Map<String, Object> res = new HashMap<>();
+            Products targetProduct = productsRepository.getProductsById(data.getProductId());
+            targetProduct.setQuantityStore(targetProduct.getQuantityStore() + data.getQuantity());
+            Products updatedData = productsRepository.save(targetProduct);
+            res.put(Responses.Message.getKey(), "Successfully!");
+            res.put(Responses.Data.getKey(), updatedData);
+            return res;
+        } catch (Error error) {
+            log.error(error.getMessage());
+            throw new CustomMessageError(error.getMessage());
+        }
+    }
+
 }
