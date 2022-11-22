@@ -32,7 +32,7 @@ public class HeaderInterceptor implements WebGraphQlInterceptor {
         Users currentUser = new Users();
         List<String> authorization = data.get(Headers.Authorization.getKey());
 
-        if(authorization != null){
+        if(authorization != null && !authorization.get(0).isEmpty()){
             String token = authorization.get(0).split(" ")[1];
             String userId = jwtTokenProvider.getUserIdFromJWT(token);
             currentUser = usersRepository.getUsersById(userId);

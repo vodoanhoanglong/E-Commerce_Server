@@ -1,6 +1,8 @@
 package dev.ecommerce.resolvers.product.handler;
 
 import dev.ecommerce.models.Users;
+import dev.ecommerce.shared.helpers.Data;
+import dev.ecommerce.shared.resources.Responses;
 import dev.ecommerce.shared.schemas.PaginationInput;
 import dev.ecommerce.resolvers.product.schema.ProductReqBody;
 import dev.ecommerce.models.ProductImages;
@@ -26,7 +28,7 @@ import javax.validation.Valid;
 import java.util.*;
 
 @Controller
-public class ProductResolvers {
+public class ProductResolver {
     @Autowired
     ProductsRepository productsRepository;
     @Autowired
@@ -36,26 +38,23 @@ public class ProductResolvers {
 
     @QueryMapping
     public Map<String, Object> getProducts(@Argument PaginationInput paginate) {
-        Map<String, Object> response = new HashMap<>();
-        int pageNumber, pageSize;
-        if (paginate == null) {
-            pageNumber = 0;
-            pageSize = 5;
-        } else {
-            pageNumber = paginate.getPage();
-            pageSize = paginate.getSize();
-        }
         try {
-            Pageable paging = PageRequest.of(pageNumber, pageSize);
-            Page<Products> pageProds = productsRepository.findAll(paging);
-            List<Products> productsList = pageProds.getContent();
-            PaginationData pagination = new PaginationData(pageProds.getTotalElements(), pageProds.getNumber(), pageProds.getTotalPages(), pageProds.getSize());
-            response.put("data", productsList);
-            response.put("pagination", pagination);
+            Map<String, Object> response = new HashMap<>();
+
+            PaginationInput defaultValue = new PaginationInput(5, 0);
+            PaginationInput paginationValue = Data.getValueOrDefault(paginate, defaultValue);
+
+            Pageable paging = PageRequest.of(paginationValue.getPage(), paginationValue.getSize());
+            Page<Products> pageProducts = productsRepository.findAll(paging);
+            List<Products> productsList = pageProducts.getContent();
+
+            PaginationData pagination = new PaginationData(pageProducts.getTotalElements(), pageProducts.getNumber(), pageProducts.getTotalPages(), pageProducts.getSize());
+            response.put(Responses.Data.getKey(), productsList);
+            response.put(Responses.Pagination.getKey(), pagination);
+            return response;
         } catch (Error error) {
-            response.put("Error", error.getMessage());
+            throw new CustomMessageError(error.getMessage());
         }
-        return response;
     }
 
     @MutationMapping
@@ -83,8 +82,8 @@ public class ProductResolvers {
                 });
                 newProduct.setImages(images);
             }
-            res.put("data", newProduct);
-            res.put("message", "Successfully!");
+            res.put(Responses.Data.getKey(), newProduct);
+            res.put(Responses.Message.getKey(), "Successfully!");
             return res;
         } catch (Error error) {
             throw new CustomMessageError(error.getMessage());
