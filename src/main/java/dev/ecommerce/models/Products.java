@@ -1,5 +1,8 @@
 package dev.ecommerce.models;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -44,6 +47,12 @@ public class Products {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "PRODUCTID")
     private List<ProductImages> images;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ALIAS")
+    private Categories category;
+
+
 
     public Products() {
     }

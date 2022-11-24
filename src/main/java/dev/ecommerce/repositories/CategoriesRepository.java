@@ -7,4 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoriesRepository extends JpaRepository<Categories, String>, JpaSpecificationExecutor<Categories> {
+
+    Categories findByAlias(String alias);
+
+    Categories findCategoryByAlias(String alias);
 }

@@ -1,0 +1,15 @@
+input FormCreateCategoryInput{
+    alias: String!
+    name: String!
+    description: String
+}
+
+type Category{
+    alias: String
+    name: String
+    description: String
+}
+
+type FormOutputCategory{
+    isSuccess: Boolean!
+}
