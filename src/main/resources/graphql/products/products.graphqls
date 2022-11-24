@@ -4,10 +4,6 @@ input ProductReqBody {
     price: Float!
     images: [String]
 }
-input ProductQtyReqBody {
-    product_id: String!
-    quantity: Int!
-}
 type Image{
     id: String
     url: String

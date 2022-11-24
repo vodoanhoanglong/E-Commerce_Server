@@ -1,6 +1,8 @@
 type Mutation {
     createUser(form: FormCreateUserInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
     login(form: FormLoginInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
-    createNewProduct(product: ProductReqBody!): ProductMutationRes @hasRoles(roles: [admin user])
-    updateProductStock(data: ProductQtyReqBody!): ProductMutationRes @hasRoles(roles: [admin user])
+    create_product(data: ProductReqBody!): ProductMutationRes @hasRoles(roles: [admin user])
+    update_productQty(product_id: String!,value: Int! ): ProductMutationRes @hasRoles(roles: [admin user])
+    update_productInfo(product_id: String!,data: ProductReqBody!): ProductMutationRes @hasRoles(roles: [admin user])
+    delete_product(product_id: String!): ProductMutationRes @hasRoles(roles: [admin user])
 }

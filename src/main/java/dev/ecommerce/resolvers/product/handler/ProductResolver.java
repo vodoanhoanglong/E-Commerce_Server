@@ -1,7 +1,6 @@
 package dev.ecommerce.resolvers.product.handler;
 
 import dev.ecommerce.models.Users;
-import dev.ecommerce.resolvers.product.schema.ProductQtyReqBody;
 import dev.ecommerce.shared.helpers.Data;
 import dev.ecommerce.shared.resources.Responses;
 import dev.ecommerce.shared.schemas.PaginationInput;
@@ -60,30 +59,39 @@ public class ProductResolver {
         }
     }
 
+    public List<ProductImages> upload_imageList(String product_id, String user_id, List<String> urls) {
+        try {
+            List<ProductImages> images = new ArrayList<>();
+            urls.forEach(url -> {
+                UUID imageID = UUID.randomUUID();
+                ProductImages newImage = productImagesRepository.save(new ProductImages(String.valueOf(imageID), url, product_id, user_id));
+                images.add(newImage);
+            });
+            return images;
+        } catch (Error error) {
+            log.error(error.getMessage());
+            throw new CustomMessageError(error.getMessage());
+        }
+    }
+
     @MutationMapping
-    public Map<String, Object> createNewProduct(GraphQLContext graphQLContext, @Argument @Valid ProductReqBody product) {
+    public Map<String, Object> create_product(GraphQLContext graphQLContext, @Argument @Valid ProductReqBody data) {
         try {
             Map<String, Object> res = new HashMap<>();
             Users currentUser = graphQLContext.get(Headers.CurrentUser.getValue());
             String shopID = shopsRepository.getShopsByCreatedBy(currentUser.getId()).getId();
-            Products duplicate = productsRepository.findProductsByName(product.getName());
+            Products duplicate = productsRepository.findProductsByName(data.getName());
             if (duplicate != null) {
                 throw new Error(Errors.ProductAlreadyExist.getValue());
             }
-            UUID id = UUID.randomUUID();
-            String name = product.getName();
-            String desc = product.getDescription();
-            Float price = product.getPrice();
-            Products newProduct = productsRepository.save(new Products(String.valueOf(id), name, desc, price, 0L, currentUser.getId(), shopID));
-            List<String> imagesUrls = product.getImages();
+            UUID product_id = UUID.randomUUID();
+            String name = data.getName();
+            String desc = data.getDescription();
+            Float price = data.getPrice();
+            Products newProduct = productsRepository.save(new Products(String.valueOf(product_id), name, desc, price, 0L, currentUser.getId(), shopID));
+            List<String> imagesUrls = data.getImages();
             if (imagesUrls != null && !imagesUrls.isEmpty()) {
-                List<ProductImages> images = new ArrayList<>();
-                imagesUrls.forEach(url -> {
-                    UUID imageID = UUID.randomUUID();
-                    ProductImages newImage = productImagesRepository.save(new ProductImages(String.valueOf(imageID), url, String.valueOf(id), currentUser.getId()));
-                    images.add(newImage);
-                });
-                newProduct.setImages(images);
+                newProduct.setImages(upload_imageList(String.valueOf(product_id), currentUser.getId(), imagesUrls));
             }
             res.put(Responses.Data.getKey(), newProduct);
             res.put(Responses.Message.getKey(), "Successfully!");
@@ -94,12 +102,13 @@ public class ProductResolver {
         }
     }
 
+
     @MutationMapping
-    public Map<String, Object> updateProductStock(@Argument @Valid ProductQtyReqBody data) {
+    public Map<String, Object> update_productQty(@Argument @Valid String product_id, @Argument @Valid Long value) {
         try {
             Map<String, Object> res = new HashMap<>();
-            Products targetProduct = productsRepository.getProductsById(data.getProductId());
-            targetProduct.setQuantityStore(targetProduct.getQuantityStore() + data.getQuantity());
+            Products targetProduct = productsRepository.getProductsById(product_id);
+            targetProduct.setQuantityStore(targetProduct.getQuantityStore() + value);
             Products updatedData = productsRepository.save(targetProduct);
             res.put(Responses.Message.getKey(), "Successfully!");
             res.put(Responses.Data.getKey(), updatedData);
@@ -110,4 +119,53 @@ public class ProductResolver {
         }
     }
 
+    @MutationMapping
+    public Map<String, Object> update_productInfo(@Argument @Valid String product_id, @Argument @Valid ProductReqBody data) {
+        try {
+            Map<String, Object> res = new HashMap<>();
+            Products targetProduct = productsRepository.getProductsById(product_id);
+            targetProduct.setName(data.getName());
+            targetProduct.setDescription(data.getDescription());
+            targetProduct.setPrice(data.getPrice());
+            Products updatedData = productsRepository.save(targetProduct);
+            res.put(Responses.Message.getKey(), "Successfully!");
+            res.put(Responses.Data.getKey(), updatedData);
+            return res;
+        } catch (Error error) {
+            log.error(error.getMessage());
+            throw new CustomMessageError(error.getMessage());
+        }
+    }
+
+    @MutationMapping
+    public Map<String, Object> update_productImg(@Argument @Valid String product_id, @Argument @Valid List<ProductImages> images) {
+        try {
+            Map<String, Object> res = new HashMap<>();
+            Products targetProduct = productsRepository.getProductsById(product_id);
+            targetProduct.setImages(images);
+            Products updatedData = productsRepository.save(targetProduct);
+            res.put(Responses.Message.getKey(), "Successfully!");
+            res.put(Responses.Data.getKey(), updatedData);
+            return res;
+        } catch (Error error) {
+            log.error(error.getMessage());
+            throw new CustomMessageError(error.getMessage());
+        }
+    }
+
+    @MutationMapping
+    public Map<String, Object> delete_product(@Argument @Valid String product_id) {
+        try {
+            Map<String, Object> res = new HashMap<>();
+            Products target = productsRepository.getProductsById(product_id);
+            target.setStatus("disable");
+            Products isDisabled = productsRepository.save(target);
+            res.put(Responses.Message.getKey(), "Successfully!");
+            res.put(Responses.Data.getKey(), isDisabled);
+            return res;
+        } catch (Error error) {
+            log.error(error.getMessage());
+            throw new CustomMessageError(error.getMessage());
+        }
+    }
 }
