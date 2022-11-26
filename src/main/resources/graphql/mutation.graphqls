@@ -4,4 +4,6 @@ type Mutation {
     createNewProduct(product: ProductReqBody!): ProductMutationRes @hasRoles(roles: [admin user])
     createCategory(form: FormCreateCategoryInput!): FormOutputCategory @hasRoles(roles: [admin user])
     updateCategory(form: FormCreateCategoryInput!): FormOutputCategory @hasRoles(roles: [admin user])
+    updateUsers(form: FormUpdateUsersInput!): User @hasRoles(roles: [admin user])
+    updatePasswordUsers(form: FormUpdatePassword!): FormOutPutUpdatePassword @hasRoles(roles: [admin user])
 }
