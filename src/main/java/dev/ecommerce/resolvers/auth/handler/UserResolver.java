@@ -114,7 +114,7 @@ public class UserResolver {
         try{
             Users currentUser = contextValue.get(Headers.CurrentUser.getValue());
             if(!bCryptPasswordEncoder.matches(form.getPassword(), currentUser.getPassword())){
-                throw new Error(Errors.EnterThePassword.getValue());
+                throw new Error(Errors.OldPasswordNotCorrect.getValue());
             }
             String newPassword = bCryptPasswordEncoder.encode(form.getNewPassword());
             currentUser.setPassword(newPassword);

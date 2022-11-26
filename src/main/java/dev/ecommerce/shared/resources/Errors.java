@@ -5,7 +5,7 @@ public enum Errors {
     UserNotFound("user_not_found", "Không tìm thấy người dùng"),
     ProductAlreadyExist("product_already_exist", "Sản phẩm đã tồn tại!"),
     CategoriesAlreadyExist("categories_already_exist", "Danh mục đã tồn tại!"),
-    EnterThePassword("enter_the_password","Nhập lại mật khẩu");
+    OldPasswordNotCorrect("old_password_not_correct","Mật khẩu cũ không đúng");
 
     private final String key;
     private final String value;

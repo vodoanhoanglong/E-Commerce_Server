@@ -29,15 +29,6 @@ type FormOutputCreateUser {
     token: String!
 }
 
-type FormOutputUpdateUser {
-    fullName: String!
-    address: String!
-    gender: String!
-    bod: String!
-    phoneNumber: String!
-    avatar: String!
-}
-
 type FormOutPutUpdatePassword {
     isSuccess: Boolean!
 }
@@ -51,4 +42,9 @@ type User {
     id: String
     fullName: String
     email: String
+    gender: String
+    phoneNumber: String
+    bod: String
+    address: String
+    avatar: String
 }
