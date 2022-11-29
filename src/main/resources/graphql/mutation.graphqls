@@ -1,27 +1,10 @@
 type Mutation {
-	createUser(form: FormCreateUserInput!): FormOutputCreateUser
-		@hasRoles(roles: [anonymous])
-	login(form: FormLoginInput!): FormOutputCreateUser
-		@hasRoles(roles: [anonymous])
-	create_product(data: ProductReqBody!): ProductMutationRes
-		@hasRoles(roles: [admin, user])
-	update_productQty(product_id: String!, value: Int!): ProductMutationRes
-		@hasRoles(roles: [admin, user])
-	update_productInfo(
-		product_id: String!
-		data: ProductReqBody!
-	): ProductMutationRes @hasRoles(roles: [admin, user])
-	delete_product(product_id: String!): ProductMutationRes
-		@hasRoles(roles: [admin, user])
-	createCategory(form: FormCreateCategoryInput!): FormOutputCategory
-		@hasRoles(roles: [admin, user])
-	updateCategory(form: FormCreateCategoryInput!): FormOutputCategory
-		@hasRoles(roles: [admin, user])
-	createCategory(form: FormCreateCategoryInput!): FormOutputCategory
-		@hasRoles(roles: [admin, user])
-	updateCategory(form: FormCreateCategoryInput!): FormOutputCategory
-		@hasRoles(roles: [admin, user])
-	updateUsers(form: FormUpdateUsersInput!): User @hasRoles(roles: [admin, user])
-	updatePasswordUsers(form: FormUpdatePassword!): FormOutPutUpdatePassword
-		@hasRoles(roles: [admin, user])
+    createUser(form: FormCreateUserInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
+    login(form: FormLoginInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
+    create_product(data: ProductReqBody!): ProductMutationRes@hasRoles(roles: [admin, user])
+    update_productQty(product_id: String!, value: Int!): ProductMutationRes @hasRoles(roles: [admin, user])
+    update_productInfo(product_id: String!, data: ProductReqBody!): ProductMutationRes @hasRoles(roles: [admin, user])
+    delete_product(product_id: String!): ProductMutationRes @hasRoles(roles: [admin, user])
+    createCategory(form: FormCreateCategoryInput!): FormOutputCategory @hasRoles(roles: [admin, user])
+    updateCategory(form: FormCreateCategoryInput!): FormOutputCategory @hasRoles(roles: [admin, user])
 }

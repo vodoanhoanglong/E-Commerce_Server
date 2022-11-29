@@ -3,34 +3,11 @@ input FormCreateUserInput {
     fullName: String!
     email: String!
     password: String!
-    phoneNumber: String!
-    gender: String!
-    address: String!
-    bod: String!
-    avatar: String!
-}
-
-input FormUpdateUsersInput {
-    fullName: String!
-    address: String!
-    gender: String!
-    bod: String!
-    phoneNumber: String!
-    avatar: String!
-}
-
-input  FormUpdatePassword {
-    password: String!
-    newPassword: String!
 }
 
 type FormOutputCreateUser {
     isSuccess: Boolean!
     token: String!
-}
-
-type FormOutPutUpdatePassword {
-    isSuccess: Boolean!
 }
 
 input FormLoginInput {
@@ -42,9 +19,4 @@ type User {
     id: String
     fullName: String
     email: String
-    gender: String
-    phoneNumber: String
-    bod: String
-    address: String
-    avatar: String
 }
