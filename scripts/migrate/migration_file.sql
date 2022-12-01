@@ -1,23 +1,23 @@
 create table users
 (
-    id          varchar2(36)         not null
+    id          nvarchar2(36)         not null
         constraint users_pk primary key,
-    email       varchar2(100) unique not null
+    email       nvarchar2(100) unique not null
         constraint users_email_valid_check CHECK ( REGEXP_LIKE(email,
         '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$')),
-    password    varchar2(500)        not null,
-    fullName    varchar2(100),
-    address     varchar2(500),
-    avatar      varchar2(500),
-    gender      varchar2(20),
-    bod         varchar2(20),
-    phoneNumber varchar2(20),
-    status      varchar2(20) default 'active',
+    password    nvarchar2(500)        not null,
+    fullName    nvarchar2(100),
+    address     nvarchar2(500),
+    avatar      nvarchar2(500),
+    gender      nvarchar2(20),
+    bod         nvarchar2(20),
+    phoneNumber nvarchar2(20),
+    status      nvarchar2(20) default 'active',
     createdAt   timestamp    default current_timestamp,
     updatedAt   timestamp    default current_timestamp,
-    createdBy   varchar2(36),
-    updatedBy   varchar2(36),
-    role        varchar(30)  default 'user'
+    createdBy   nvarchar2(36),
+    updatedBy   nvarchar2(36),
+    role        nvarchar2(30)  default 'user'
 );
 
 CREATE OR REPLACE TRIGGER users_trigger
@@ -32,15 +32,15 @@ end;
 
 create table categories
 (
-    alias       varchar2(100) unique not null
+    alias       nvarchar2(100) not null
         constraint categories_pk primary key,
-    name        varchar2(200) unique,
-    description varchar2(500),
-    status      varchar2(20) default 'active',
+    name        nvarchar2(200) unique,
+    description nvarchar2(500),
+    status      nvarchar2(20) default 'active',
     createdAt   timestamp    default current_timestamp,
     updatedAt   timestamp    default current_timestamp,
-    createdBy   varchar2(36),
-    updatedBy   varchar2(36)
+    createdBy   nvarchar2(36),
+    updatedBy   nvarchar2(36)
 );
 
 CREATE OR REPLACE TRIGGER categories_trigger
@@ -55,19 +55,19 @@ end;
 
 create table shops
 (
-    id          varchar2(36) not null
+    id          nvarchar2(36) not null
         constraint shops_pk primary key,
-    name        varchar2(200),
-    address     varchar2(500),
-    phoneNumber varchar2(20),
-    logo        varchar2(500),
-    banner      varchar2(500),
-    status      varchar2(20) default 'active',
+    name        nvarchar2(200),
+    address     nvarchar2(500),
+    phoneNumber nvarchar2(20),
+    logo        nvarchar2(500),
+    banner      nvarchar2(500),
+    status      nvarchar2(20) default 'active',
     createdAt   timestamp    default current_timestamp,
     updatedAt   timestamp    default current_timestamp,
-    createdBy   varchar2(36)
+    createdBy   nvarchar2(36)
         constraint shops_users_createdBy_fk references USERS (ID),
-    updatedBy   varchar2(36)
+    updatedBy   nvarchar2(36)
         constraint shops_users_updatedBy_fk references USERS (ID)
 );
 
@@ -83,21 +83,23 @@ end;
 
 create table products
 (
-    id            varchar2(36) not null
+    id            nvarchar2(36) not null
         constraint products_pk primary key,
-    name          varchar2(200),
-    description   varchar2(500),
+    name          nvarchar2(200),
+    description   nvarchar2(500),
     price         float,
     quantityStore int,
-    status        varchar2(20) default 'active',
+    status        nvarchar2(20) default 'active',
     createdAt     timestamp    default current_timestamp,
     updatedAt     timestamp    default current_timestamp,
-    createdBy     varchar2(36)
+    createdBy     nvarchar2(36)
         constraint products_users_createdBy_fk references USERS (ID),
-    updatedBy     varchar2(36)
+    updatedBy     nvarchar2(36)
         constraint products_users_updatedBy_fk references USERS (ID),
-    shopId        varchar2(36)
-        constraint products_shops_shopId_fk references SHOPS (ID)
+    shopId        nvarchar2(36)
+        constraint products_shops_shopId_fk references SHOPS (ID),
+    categoryAlias nvarchar2(100)
+        constraint products_categories_categoryAlias_fk references CATEGORIES (ALIAS)
 );
 
 CREATE OR REPLACE TRIGGER products_trigger
@@ -112,17 +114,17 @@ end;
 
 create table product_images
 (
-    id        varchar2(36) not null
+    id        nvarchar2(36) not null
         constraint product_images_pk primary key,
-    url       varchar2(500),
-    status    varchar2(20) default 'active',
+    url       nvarchar2(500),
+    status    nvarchar2(20) default 'active',
     createdAt timestamp    default current_timestamp,
     updatedAt timestamp    default current_timestamp,
-    createdBy varchar2(36)
+    createdBy nvarchar2(36)
         constraint product_images_users_createdBy_fk references USERS (ID),
-    updatedBy varchar2(36)
+    updatedBy nvarchar2(36)
         constraint product_images_users_updatedBy_fk references USERS (ID),
-    productId varchar2(36)
+    productId nvarchar2(36)
         constraint product_images_products_productId_fk references PRODUCTS (ID)
 );
 
@@ -138,20 +140,18 @@ end;
 
 create table orders
 (
-    id         varchar2(36) not null
+    id         nvarchar2(36) not null
         constraint orders_pk primary key,
     totalMoney double precision,
     quantity   int,
     discount   float,
-    status     varchar2(20) default 'active',
+    status     nvarchar2(20) default 'active',
     createdAt  timestamp    default current_timestamp,
     updatedAt  timestamp    default current_timestamp,
-    createdBy  varchar2(36)
+    createdBy  nvarchar2(36)
         constraint orders_users_createdBy_fk references USERS (ID),
-    updatedBy  varchar2(36)
-        constraint orders_users_updatedBy_fk references USERS (ID),
-    shopId     varchar2(36)
-        constraint orders_shops_shopId_fk references USERS (ID)
+    updatedBy  nvarchar2(36)
+        constraint orders_users_updatedBy_fk references USERS (ID)
 );
 
 CREATE OR REPLACE TRIGGER orders_trigger
@@ -166,19 +166,21 @@ end;
 
 create table order_details
 (
-    id        varchar2(36) not null
+    id        nvarchar2(36) not null
         constraint order_details_pk primary key,
-    orderId   varchar2(36)
+    orderId   nvarchar2(36)
         constraint order_details_orders_orderId_fk references ORDERS (ID),
-    productId varchar2(36)
+    productId nvarchar2(36)
         constraint order_details_products_productId_fk references USERS (ID),
-    status    varchar2(20) default 'active',
+    status    nvarchar2(20) default 'active',
     createdAt timestamp    default current_timestamp,
     updatedAt timestamp    default current_timestamp,
-    createdBy varchar2(36)
+    createdBy nvarchar2(36)
         constraint order_details_users_createdBy_fk references USERS (ID),
-    updatedBy varchar2(36)
-        constraint order_details_users_updatedBy_fk references USERS (ID)
+    updatedBy nvarchar2(36)
+        constraint order_details_users_updatedBy_fk references USERS (ID),
+    shopId    nvarchar2(36)
+        constraint order_details_shops_shopId_fk references SHOPS (ID)
 );
 
 CREATE OR REPLACE TRIGGER order_details_trigger
