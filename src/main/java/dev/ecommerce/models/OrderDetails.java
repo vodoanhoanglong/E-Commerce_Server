@@ -30,6 +30,33 @@ public class OrderDetails {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
+    @Column(name = "SHOPID")
+    private String shopId;
+
+    @ManyToOne(targetEntity = Products.class)
+    @JoinColumn(name = "ID", insertable = false, updatable = false)
+    private Products product;
+
+    @ManyToOne(targetEntity = Orders.class)
+    @JoinColumn(name = "ID", insertable = false, updatable = false)
+    private Orders order;
+
+    public Products getProduct() {
+        return product;
+    }
+
+    public void setProduct(Products product) {
+        this.product = product;
+    }
+
+    public Orders getOrder() {
+        return order;
+    }
+
+    public void setOrder(Orders order) {
+        this.order = order;
+    }
+
     public String getId() {
         return this.id;
     }
@@ -92,5 +119,13 @@ public class OrderDetails {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
     }
 }

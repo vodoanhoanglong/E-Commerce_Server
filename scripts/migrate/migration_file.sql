@@ -32,7 +32,7 @@ end;
 
 create table categories
 (
-    alias       varchar2(100) unique not null
+    alias       varchar2(100) not null
         constraint categories_pk primary key,
     name        varchar2(200) unique,
     description varchar2(500),
@@ -97,7 +97,9 @@ create table products
     updatedBy     varchar2(36)
         constraint products_users_updatedBy_fk references USERS (ID),
     shopId        varchar2(36)
-        constraint products_shops_shopId_fk references SHOPS (ID)
+        constraint products_shops_shopId_fk references SHOPS (ID),
+    categoryAlias varchar2(100)
+        constraint products_categories_categoryAlias_fk references CATEGORIES (ALIAS)
 );
 
 CREATE OR REPLACE TRIGGER products_trigger
@@ -149,9 +151,7 @@ create table orders
     createdBy  varchar2(36)
         constraint orders_users_createdBy_fk references USERS (ID),
     updatedBy  varchar2(36)
-        constraint orders_users_updatedBy_fk references USERS (ID),
-    shopId     varchar2(36)
-        constraint orders_shops_shopId_fk references USERS (ID)
+        constraint orders_users_updatedBy_fk references USERS (ID)
 );
 
 CREATE OR REPLACE TRIGGER orders_trigger
@@ -178,7 +178,9 @@ create table order_details
     createdBy varchar2(36)
         constraint order_details_users_createdBy_fk references USERS (ID),
     updatedBy varchar2(36)
-        constraint order_details_users_updatedBy_fk references USERS (ID)
+        constraint order_details_users_updatedBy_fk references USERS (ID),
+    shopId    varchar2(36)
+        constraint order_details_shops_shopId_fk references SHOPS (ID)
 );
 
 CREATE OR REPLACE TRIGGER order_details_trigger
