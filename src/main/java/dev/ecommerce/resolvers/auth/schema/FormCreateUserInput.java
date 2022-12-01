@@ -5,15 +5,15 @@ import javax.validation.constraints.*;
 public class FormCreateUserInput {
     public FormCreateUserInput(String fullName, String email, String password, String id, String phoneNumber, String address,
                                String bod, String gender, String avatar) {
-        this.fullName = fullName;
+        this.id = id;
         this.email = email;
         this.password = password;
-        this.id = id;
-        this.phoneNumber = phoneNumber;
+        this.fullName = fullName;
         this.address = address;
-        this.bod = bod;
-        this.gender = gender;
         this.avatar = avatar;
+        this.gender = gender;
+        this.bod = bod;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getFullName() {
