@@ -1,6 +1,7 @@
 package dev.ecommerce.resolvers.product.handler;
 
 import dev.ecommerce.models.Users;
+import dev.ecommerce.resolvers.product.schema.FilterProductList;
 import dev.ecommerce.shared.helpers.Data;
 import dev.ecommerce.shared.resources.Responses;
 import dev.ecommerce.shared.schemas.PaginationInput;
@@ -39,15 +40,17 @@ public class ProductResolver {
     ShopsRepository shopsRepository;
 
     @QueryMapping
-    public Map<String, Object> getProducts(@Argument PaginationInput paginate) {
+    public Map<String, Object> getProducts(@Argument FilterProductList filter) {
         try {
             Map<String, Object> response = new HashMap<>();
 
             PaginationInput defaultValue = new PaginationInput(5, 0);
-            PaginationInput paginationValue = Data.getValueOrDefault(paginate, defaultValue);
+            PaginationInput paginationValue = Data.getValueOrDefault(filter.getPaginate(), defaultValue);
 
             Pageable paging = PageRequest.of(paginationValue.getPage(), paginationValue.getSize());
-            Page<Products> pageProducts = productsRepository.findAll(paging);
+            Page<Products> pageProducts = filter.getCategoryAliases().size() > 0 ?
+                    productsRepository.findAllByCategoryAliasIn(filter.getCategoryAliases(), paging)
+                    : productsRepository.findAll(paging);
             List<Products> productsList = pageProducts.getContent();
 
             PaginationData pagination = new PaginationData(pageProducts.getTotalElements(), pageProducts.getNumber(), pageProducts.getTotalPages(), pageProducts.getSize());

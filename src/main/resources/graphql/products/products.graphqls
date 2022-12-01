@@ -4,6 +4,12 @@ input ProductReqBody {
     price: Float!
     images: [String]
 }
+
+input FilterProductList {
+    categoryAliases: [String]!
+    paginate: PaginationInput
+}
+
 type Image{
     id: String
     url: String
@@ -19,8 +25,9 @@ type Product{
     createdBy: String
     updatedBy: String
     shopID: String
+    categoryAlias: String
+    category: Category
 }
-
 
 type ProductListRes{
     data: [Product]

@@ -1,0 +1,18 @@
+input FormCreateOrder {
+    productIds: [String]
+}
+
+type CreateOrderOutput {
+    id: String
+    totalMoney: String
+    quantity: Int
+    discount: Int
+    createdAt: String
+    createdBy: String
+    orderDetails: [OrderDetail]
+}
+
+type OrderDetail {
+    id: String
+    product: Product
+}
