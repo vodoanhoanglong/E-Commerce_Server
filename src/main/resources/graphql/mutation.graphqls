@@ -1,10 +1,28 @@
 type Mutation {
-    createUser(form: FormCreateUserInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
-    login(form: FormLoginInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
-    createNewProduct(product: ProductReqBody!): ProductMutationRes @hasRoles(roles: [admin user])
-    createCategory(form: FormCreateCategoryInput!): FormOutputCategory @hasRoles(roles: [admin user])
-    updateCategory(form: FormCreateCategoryInput!): FormOutputCategory @hasRoles(roles: [admin user])
-    updateUsers(form: FormUpdateUsersInput!): User @hasRoles(roles: [admin user])
-    updatePasswordUsers(form: FormUpdatePassword!): FormOutPutUpdatePassword @hasRoles(roles: [admin user])
-    createOrder(form: FormCreateOrder!): CreateOrderOutput @hasRoles(roles: [user])
+    createUser(form: FormCreateUserInput!): FormOutputCreateUser
+    @hasRoles(roles: [anonymous])
+    login(form: FormLoginInput!): FormOutputCreateUser
+    @hasRoles(roles: [anonymous])
+
+    createCategory(form: FormCreateCategoryInput!): FormOutputCategory
+    @hasRoles(roles: [admin, user])
+    updateCategory(form: FormCreateCategoryInput!): FormOutputCategory
+    @hasRoles(roles: [admin, user])
+    updateUsers(form: FormUpdateUsersInput!): User @hasRoles(roles: [admin, user])
+    updatePasswordUsers(form: FormUpdatePassword!): FormOutPutUpdatePassword
+    @hasRoles(roles: [admin, user])
+
+    createProduct(data: ProductReqBody!): ProductMutationRes
+    @hasRoles(roles: [admin, user])
+    updateProductQuantity(product_id: String!, value: Int!): ProductMutationRes
+    @hasRoles(roles: [admin, user])
+    updateProductInfo(
+        product_id: String!
+        data: ProductReqBody!
+    ): ProductMutationRes @hasRoles(roles: [admin, user])
+    deleteProduct(product_id: String!): ProductMutationRes
+    @hasRoles(roles: [admin, user])
+
+    createOrder(form: FormCreateOrder!): CreateOrderOutput
+    @hasRoles(roles: [user])
 }
