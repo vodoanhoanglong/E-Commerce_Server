@@ -14,13 +14,13 @@ type Mutation {
 
     createProduct(data: ProductReqBody!): ProductMutationRes
     @hasRoles(roles: [admin, user])
-    updateProductQuantity(product_id: String!, value: Int!): ProductMutationRes
+    updateProductQuantity(productId: String!, value: Int!): ProductMutationRes
     @hasRoles(roles: [admin, user])
     updateProductInfo(
-        product_id: String!
+        productId: String!
         data: ProductReqBody!
     ): ProductMutationRes @hasRoles(roles: [admin, user])
-    deleteProduct(product_id: String!): ProductMutationRes
+    deleteProduct(productId: String!): ProductMutationRes
     @hasRoles(roles: [admin, user])
 
     createOrder(form: FormCreateOrder!): CreateOrderOutput
