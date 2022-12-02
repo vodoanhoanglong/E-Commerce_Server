@@ -4,6 +4,7 @@ import dev.ecommerce.models.Users;
 import dev.ecommerce.resolvers.product.schema.FilterProductList;
 import dev.ecommerce.shared.helpers.Data;
 import dev.ecommerce.shared.resources.Responses;
+import dev.ecommerce.shared.resources.StatusCode;
 import dev.ecommerce.shared.schemas.PaginationInput;
 import dev.ecommerce.resolvers.product.schema.ProductReqBody;
 import dev.ecommerce.models.ProductImages;
@@ -62,7 +63,7 @@ public class ProductResolver {
         }
     }
 
-    public List<ProductImages> upload_imageList(String product_id, String user_id, List<String> urls) {
+    public List<ProductImages> uploadImageList(String product_id, String user_id, List<String> urls) {
         try {
             List<ProductImages> images = new ArrayList<>();
             urls.forEach(url -> {
@@ -78,7 +79,7 @@ public class ProductResolver {
     }
 
     @MutationMapping
-    public Map<String, Object> create_product(GraphQLContext graphQLContext, @Argument @Valid ProductReqBody data) {
+    public Map<String, Object> createProduct(GraphQLContext graphQLContext, @Argument @Valid ProductReqBody data) {
         try {
             Map<String, Object> res = new HashMap<>();
             Users currentUser = graphQLContext.get(Headers.CurrentUser.getValue());
@@ -94,7 +95,7 @@ public class ProductResolver {
             Products newProduct = productsRepository.save(new Products(String.valueOf(product_id), name, desc, price, 0L, currentUser.getId(), shopID));
             List<String> imagesUrls = data.getImages();
             if (imagesUrls != null && !imagesUrls.isEmpty()) {
-                newProduct.setImages(upload_imageList(String.valueOf(product_id), currentUser.getId(), imagesUrls));
+                newProduct.setImages(uploadImageList(String.valueOf(product_id), currentUser.getId(), imagesUrls));
             }
             res.put(Responses.Data.getKey(), newProduct);
             res.put(Responses.Message.getKey(), "Successfully!");
@@ -107,7 +108,7 @@ public class ProductResolver {
 
 
     @MutationMapping
-    public Map<String, Object> update_productQty(@Argument @Valid String product_id, @Argument @Valid Long value) {
+    public Map<String, Object> updateProductQuantity(@Argument @Valid String product_id, @Argument @Valid Long value) {
         try {
             Map<String, Object> res = new HashMap<>();
             Products targetProduct = productsRepository.getProductsById(product_id);
@@ -123,7 +124,7 @@ public class ProductResolver {
     }
 
     @MutationMapping
-    public Map<String, Object> update_productInfo(@Argument @Valid String product_id, @Argument @Valid ProductReqBody data) {
+    public Map<String, Object> updateProductInfo(@Argument @Valid String product_id, @Argument @Valid ProductReqBody data) {
         try {
             Map<String, Object> res = new HashMap<>();
             Products targetProduct = productsRepository.getProductsById(product_id);
@@ -141,7 +142,7 @@ public class ProductResolver {
     }
 
     @MutationMapping
-    public Map<String, Object> update_productImg(@Argument @Valid String product_id, @Argument @Valid List<ProductImages> images) {
+    public Map<String, Object> updateProductImg(@Argument @Valid String product_id, @Argument @Valid List<ProductImages> images) {
         try {
             Map<String, Object> res = new HashMap<>();
             Products targetProduct = productsRepository.getProductsById(product_id);
@@ -157,11 +158,11 @@ public class ProductResolver {
     }
 
     @MutationMapping
-    public Map<String, Object> delete_product(@Argument @Valid String product_id) {
+    public Map<String, Object> deleteProduct(@Argument @Valid String product_id) {
         try {
             Map<String, Object> res = new HashMap<>();
             Products target = productsRepository.getProductsById(product_id);
-            target.setStatus("disable");
+            target.setStatus(StatusCode.Deleted.getKey());
             Products isDisabled = productsRepository.save(target);
             res.put(Responses.Message.getKey(), "Successfully!");
             res.put(Responses.Data.getKey(), isDisabled);

@@ -12,15 +12,15 @@ type Mutation {
     updatePasswordUsers(form: FormUpdatePassword!): FormOutPutUpdatePassword
     @hasRoles(roles: [admin, user])
 
-    create_product(data: ProductReqBody!): ProductMutationRes
+    createProduct(data: ProductReqBody!): ProductMutationRes
     @hasRoles(roles: [admin, user])
-    update_productQty(product_id: String!, value: Int!): ProductMutationRes
+    updateProductQuantity(product_id: String!, value: Int!): ProductMutationRes
     @hasRoles(roles: [admin, user])
-    update_productInfo(
+    updateProductInfo(
         product_id: String!
         data: ProductReqBody!
     ): ProductMutationRes @hasRoles(roles: [admin, user])
-    delete_product(product_id: String!): ProductMutationRes
+    deleteProduct(product_id: String!): ProductMutationRes
     @hasRoles(roles: [admin, user])
 
     createOrder(form: FormCreateOrder!): CreateOrderOutput
