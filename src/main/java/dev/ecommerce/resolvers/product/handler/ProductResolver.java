@@ -63,12 +63,12 @@ public class ProductResolver {
         }
     }
 
-    public List<ProductImages> uploadImageList(String product_id, String user_id, List<String> urls) {
+    public List<ProductImages> uploadImageList(String productId, String userId, List<String> urls) {
         try {
             List<ProductImages> images = new ArrayList<>();
             urls.forEach(url -> {
                 UUID imageID = UUID.randomUUID();
-                ProductImages newImage = productImagesRepository.save(new ProductImages(String.valueOf(imageID), url, product_id, user_id));
+                ProductImages newImage = productImagesRepository.save(new ProductImages(String.valueOf(imageID), url, productId, userId));
                 images.add(newImage);
             });
             return images;
@@ -88,14 +88,14 @@ public class ProductResolver {
             if (duplicate != null) {
                 throw new Error(Errors.ProductAlreadyExist.getValue());
             }
-            UUID product_id = UUID.randomUUID();
+            UUID productId = UUID.randomUUID();
             String name = data.getName();
             String desc = data.getDescription();
             Float price = data.getPrice();
-            Products newProduct = productsRepository.save(new Products(String.valueOf(product_id), name, desc, price, 0L, currentUser.getId(), shopID));
+            Products newProduct = productsRepository.save(new Products(String.valueOf(productId), name, desc, price, 0L, currentUser.getId(), shopID));
             List<String> imagesUrls = data.getImages();
             if (imagesUrls != null && !imagesUrls.isEmpty()) {
-                newProduct.setImages(uploadImageList(String.valueOf(product_id), currentUser.getId(), imagesUrls));
+                newProduct.setImages(uploadImageList(String.valueOf(productId), currentUser.getId(), imagesUrls));
             }
             res.put(Responses.Data.getKey(), newProduct);
             res.put(Responses.Message.getKey(), "Successfully!");
@@ -108,10 +108,10 @@ public class ProductResolver {
 
 
     @MutationMapping
-    public Map<String, Object> updateProductQuantity(@Argument @Valid String product_id, @Argument @Valid Long value) {
+    public Map<String, Object> updateProductQuantity(@Argument @Valid String productId, @Argument @Valid Long value) {
         try {
             Map<String, Object> res = new HashMap<>();
-            Products targetProduct = productsRepository.getProductsById(product_id);
+            Products targetProduct = productsRepository.getProductsById(productId);
             targetProduct.setQuantityStore(targetProduct.getQuantityStore() + value);
             Products updatedData = productsRepository.save(targetProduct);
             res.put(Responses.Message.getKey(), "Successfully!");
@@ -124,10 +124,10 @@ public class ProductResolver {
     }
 
     @MutationMapping
-    public Map<String, Object> updateProductInfo(@Argument @Valid String product_id, @Argument @Valid ProductReqBody data) {
+    public Map<String, Object> updateProductInfo(@Argument @Valid String productId, @Argument @Valid ProductReqBody data) {
         try {
             Map<String, Object> res = new HashMap<>();
-            Products targetProduct = productsRepository.getProductsById(product_id);
+            Products targetProduct = productsRepository.getProductsById(productId);
             targetProduct.setName(data.getName());
             targetProduct.setDescription(data.getDescription());
             targetProduct.setPrice(data.getPrice());
@@ -142,10 +142,10 @@ public class ProductResolver {
     }
 
     @MutationMapping
-    public Map<String, Object> updateProductImg(@Argument @Valid String product_id, @Argument @Valid List<ProductImages> images) {
+    public Map<String, Object> updateProductImg(@Argument @Valid String productId, @Argument @Valid List<ProductImages> images) {
         try {
             Map<String, Object> res = new HashMap<>();
-            Products targetProduct = productsRepository.getProductsById(product_id);
+            Products targetProduct = productsRepository.getProductsById(productId);
             targetProduct.setImages(images);
             Products updatedData = productsRepository.save(targetProduct);
             res.put(Responses.Message.getKey(), "Successfully!");
@@ -158,10 +158,10 @@ public class ProductResolver {
     }
 
     @MutationMapping
-    public Map<String, Object> deleteProduct(@Argument @Valid String product_id) {
+    public Map<String, Object> deleteProduct(@Argument @Valid String productId) {
         try {
             Map<String, Object> res = new HashMap<>();
-            Products target = productsRepository.getProductsById(product_id);
+            Products target = productsRepository.getProductsById(productId);
             target.setStatus(StatusCode.Deleted.getKey());
             Products isDisabled = productsRepository.save(target);
             res.put(Responses.Message.getKey(), "Successfully!");
