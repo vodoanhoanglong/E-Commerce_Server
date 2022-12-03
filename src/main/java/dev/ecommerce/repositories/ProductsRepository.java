@@ -16,4 +16,7 @@ public interface ProductsRepository extends JpaRepository<Products, String>, Jpa
     @NotNull Page<Products> findAll(@NotNull Pageable pageable);
     @NotNull Page<Products> findAllByCategoryAliasIn(List<String> categoryAliases, @NotNull Pageable pageable);
     Products findProductsByName(String productName);
+
+    List<Products> findAllProductByIdIn(List<String> productIds);
+
 }

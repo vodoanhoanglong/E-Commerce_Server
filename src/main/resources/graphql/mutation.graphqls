@@ -6,5 +6,5 @@ type Mutation {
     updateCategory(form: FormCreateCategoryInput!): FormOutputCategory @hasRoles(roles: [admin user])
     updateUsers(form: FormUpdateUsersInput!): User @hasRoles(roles: [admin user])
     updatePasswordUsers(form: FormUpdatePassword!): FormOutPutUpdatePassword @hasRoles(roles: [admin user])
-    createOrder(form: FormCreateOrder!): CreateOrderOutput @hasRoles(roles: [user])
+    createOrder(form: FormCreateOrder!): String @hasRoles(roles: [user])
 }
