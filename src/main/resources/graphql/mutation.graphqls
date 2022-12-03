@@ -2,6 +2,6 @@ type Mutation {
     createUser(form: FormCreateUserInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
     login(form: FormLoginInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
     createNewProduct(product: ProductReqBody!): ProductMutationRes @hasRoles(roles: [admin user])
-    createNewShop(formShops: FormCreateshops!): FormOutputCreateShops @hasRoles(roles: [admin user])
 #    updateShop(formShops: FormCreateshops!): FormOutputCreateShops
+    createShops(shopsForm: FormCreateShopInput!): FormOutputCreateShops @hasRoles(roles: [admin user anonymous])
 }

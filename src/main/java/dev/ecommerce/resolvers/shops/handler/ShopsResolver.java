@@ -1,9 +1,8 @@
 package dev.ecommerce.resolvers.shops.handler;
 
-import dev.ecommerce.models.Products;
 import dev.ecommerce.models.Shops;
 import dev.ecommerce.repositories.ShopsRepository;
-import dev.ecommerce.resolvers.shops.schema.FormCreateShops;
+import dev.ecommerce.resolvers.shops.schema.FormCreateShopsInput;
 import dev.ecommerce.shared.errors.CustomMessageError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class ShopsResolver {
     }
     @MutationMapping
     @Transactional
-    public Map<String, Object> createShops(@Argument @Valid FormCreateShops formShops){
+    public Map<String, Object> createShops(@Argument @Valid FormCreateShopsInput formShops){
         try {
             HashMap<String, Object> res = new HashMap<>();
             UUID id = UUID.randomUUID();

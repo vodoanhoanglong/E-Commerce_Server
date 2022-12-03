@@ -1,5 +1,4 @@
-
-input FormCreateshops {
+input FormCreateShopInput {
     name: String!
     address: String!
     phoneNumber: String!

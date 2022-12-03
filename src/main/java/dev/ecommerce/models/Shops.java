@@ -47,9 +47,9 @@ public class Shops {
         this.logo = logo;
         this.banner = banner;
         this.status = status;
-
     }
-    public Shops(){
+
+    public  Shops() {
 
     }
 
