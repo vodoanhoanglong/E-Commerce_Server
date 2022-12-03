@@ -88,45 +88,30 @@ public class FormCreateUserInput {
         this.avatar = avatar;
     }
 
-    @NotBlank
-    @NotNull
-    @NotEmpty
+
     private String fullName;
 
-    @NotBlank
-    @NotNull
-    @NotEmpty
+
     @Email
     private String email;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
+
     private String password;
 
     String id;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
+
     private String phoneNumber;
 
-    @NotNull
-    @NotEmpty
+
     private String address;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
+
     private String gender;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
+
     private String bod;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
+
     private String avatar;
 }
