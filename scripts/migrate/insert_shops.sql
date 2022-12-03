@@ -56,44 +56,4 @@ VALUES
 INSERT INTO shops
 (id, name, address, phonenumber, logo, banner)
 VALUES
-('q7334fe8-14c7-4e32-a176-f37e40603a55', 'Th??i Trang Angel Lam', '131 Lê V?n S?, P.13, Q. Phú Nhu?n', '02836854368', 'Angel Lam Logo', 'Angel Lam Banner')
-
-INSERT INTO shops
-(id, name, address, phonenumber, logo, banner)
-VALUES
-('c7334fe8-14c7-4e32-a176-f37b40603a11', 'Th??i Trang Liti', '96/2 Võ Th? Sáu, Ph??ng Tân ??nh, Qu?n 1, TPHCM.', '0909661170', 'Liti Logo', 'Liti Banner')
-
-INSERT INTO shops
-(id, name, address, phonenumber, logo, banner)
-VALUES
-('c7334fe8-14c7-4e32-a176-f37f40603a22', 'Th??i Trang Nabi', 'H?m 1050 Quang Trung, P8, Gò V?p, Tp.HCM.', '0971755534', 'Nabi Logo', 'Nabi Banner')
-
-INSERT INTO shops
-(id, name, address, phonenumber, logo, banner)
-VALUES
-('m7334fe8-14c7-4e32-a176-f37b40603a77', 'Th??i Trang Len', '257 Nguy?n Trãi, Qu?n 1, TPHCM', '0933046853', 'Len Logo', 'Len Banner')
-
-INSERT INTO shops
-(id, name, address, phonenumber, logo, banner)
-VALUES
-('m7334fe8-14c7-4e32-a176-f37c40603a79', 'Th??i Trang GuMac', '1038 Quang Trung, Ph??ng 8, Gò V?p, H? Chí Minh', '18006013', 'GuMac Logo', 'GuMac Banner')
-
-INSERT INTO shops
-(id, name, address, phonenumber, logo, banner)
-VALUES
-('n7334fe8-14c7-4e32-a176-f37d40603a75', 'Th??i Trang Dottie', '170 Nguy?n Trãi, Ph??ng Ph?m Ng? Lão, Qu?n 1, H? Chí Minh', '0775731493', 'Dottie Logo', 'Dottie Banner')
-
-INSERT INTO shops
-(id, name, address, phonenumber, logo, banner)
-VALUES
-('n7334fe8-14c7-4e32-a176-f37e40603a73', 'Th??i Trang LIBÉ', '26 Lý T? Tr?ng, L?u 1 ,Ph??ng B?n Nghé Qu?n 1, Tp.HCM', '0909408169', 'LIBÉ Logo', 'LIBÉ Banner')
-
-INSERT INTO shops
-(id, name, address, phonenumber, logo, banner)
-VALUES
-('l7334fe8-14c7-4e32-a176-f37f40603a88', 'Th??i Trang SheByShj', '63 Tú X??ng, Ph??ng 7, Qu?n 3, Thành ph? H? Chí Minh', '0817521979', 'SheByShj Logo', 'SheByShj Banner')
-
-INSERT INTO shops
-(id, name, address, phonenumber, logo, banner)
-VALUES
-('y7334fe8-14c7-4e32-a176-f37y40603a79', 'Th??i Trang Joie Des Roses', '173 Lý T? Tr?ng, B?n Thành, qu?n 1, thành ph? H? Chí Minh', '0343599808', 'Joie Des Roses Logo', 'Joie Des Roses Banner')
+('q7334fe8-14c7-4e32-a176-f37e40603a55', 'Th??i Trang Angel Lam', 'Lê V?n S?, P.13, Q. Phú Nhu?n', '02836854368', 'Angel Lam Logo', 'Angel Lam Banner')
