@@ -1,0 +1,23 @@
+
+input FormCreateshops {
+    name: String!
+    address: String!
+    phoneNumber: String!
+    logo: String!
+    banner: String!
+    status: String!
+}
+
+type FormOutputCreateShops {
+    isSuccess: Boolean!
+}
+
+type Shops {
+    id: String
+    name: String
+    address: String
+    phoneNumber: String
+    logo: String
+    banner: String
+    status: String
+}

@@ -1,19 +1,19 @@
 package dev.ecommerce.resolvers.product.handler;
 
-import dev.ecommerce.models.Users;
-import dev.ecommerce.shared.helpers.Data;
-import dev.ecommerce.shared.resources.Responses;
-import dev.ecommerce.shared.schemas.PaginationInput;
-import dev.ecommerce.resolvers.product.schema.ProductReqBody;
 import dev.ecommerce.models.ProductImages;
 import dev.ecommerce.models.Products;
-import dev.ecommerce.shared.errors.CustomMessageError;
+import dev.ecommerce.models.Users;
 import dev.ecommerce.repositories.ProductImagesRepository;
 import dev.ecommerce.repositories.ProductsRepository;
-import dev.ecommerce.shared.schemas.PaginationData;
 import dev.ecommerce.repositories.ShopsRepository;
+import dev.ecommerce.resolvers.product.schema.ProductReqBody;
+import dev.ecommerce.shared.errors.CustomMessageError;
+import dev.ecommerce.shared.helpers.Data;
 import dev.ecommerce.shared.resources.Errors;
 import dev.ecommerce.shared.resources.Headers;
+import dev.ecommerce.shared.resources.Responses;
+import dev.ecommerce.shared.schemas.PaginationData;
+import dev.ecommerce.shared.schemas.PaginationInput;
 import graphql.GraphQLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
