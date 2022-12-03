@@ -81,9 +81,4 @@ VALUES
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('men_wallet_backpack', 'tu?i va? balo nam','balo, tu?i da?nh cho nam');
-
-INSERT INTO categories
-(alias, name, description)
-VALUES
 ('toy', '?ô? ch?i','?ô? ch?i');
