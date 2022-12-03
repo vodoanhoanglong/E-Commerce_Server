@@ -62,8 +62,8 @@ public class UserResolver {
             HashMap<String, Object> map = new HashMap<>();
             UUID id = UUID.randomUUID();
             String passwordHashed = bCryptPasswordEncoder.encode(form.getPassword());
-            Users addUser = new Users(id.toString(), form.getEmail(), passwordHashed, form.getFullName(), form.getGender(),
-                    form.getPhoneNumber(), form.getAddress(), form.getBod(), form.getAvatar());
+            Users addUser = new Users(id.toString(), form.getEmail(), passwordHashed, form.getFullName(), form.getAddress(),
+                    form.getAvatar(), form.getGender(), form.getBod(), form.getPhoneNumber());
             entityManager.persist(addUser);
             map.put("isSuccess", true);
             map.put("token", jwtTokenProvider.generateToken(id.toString()));

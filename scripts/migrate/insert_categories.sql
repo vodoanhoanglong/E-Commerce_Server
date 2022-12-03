@@ -81,4 +81,4 @@ VALUES
 INSERT INTO categories
 (alias, name, description)
 VALUES
-    ('toy', 'đồ chơi','đồ chơi trẻ em, đồ chơi người lớn, ...');
+
