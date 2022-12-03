@@ -6,16 +6,16 @@ input FormCreateShopInput {
     banner: String!
     status: String!
 }
-input  FormUpdateShop {
-    id:String!
-    name: String!
-    address: String!
-    phoneNumber: String!
-    logo: String!
-    banner: String!
-    status: String!
-
-}
+#input  FormUpdateShop {
+#    id:String!
+#    name: String!
+#    address: String!
+#    phoneNumber: String!
+#    logo: String!
+#    banner: String!
+#    status: String!
+#
+#}
 type FormOutputCreateShops {
     isSuccess: Boolean!
 }
