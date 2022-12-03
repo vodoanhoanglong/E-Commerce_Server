@@ -10,6 +10,4 @@ import org.springframework.stereotype.Repository;
 public interface ShopsRepository extends JpaRepository<Shops, String>, JpaSpecificationExecutor<Shops> {
     Shops getShopsByCreatedBy(String userID);
 
-    Shops findByName(String shopName);
-
 }

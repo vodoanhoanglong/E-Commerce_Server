@@ -25,5 +25,8 @@ type Mutation {
 
     createOrder(form: FormCreateOrder!): CreateOrderOutput
     @hasRoles(roles: [user])
+    createShops(form: FormCreateShopInput!):FormOutputCreateShops
+    @hasRoles(roles: [admin, user, anonymous])
+    updateShops(form: FormUpdateShop!): Shops @hasRoles(roles: [admin, user])
 
 }

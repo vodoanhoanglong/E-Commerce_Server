@@ -1,9 +1,13 @@
 package dev.ecommerce.resolvers.shops.handler;
 
+import dev.ecommerce.models.Categories;
 import dev.ecommerce.models.Shops;
+import dev.ecommerce.models.Users;
 import dev.ecommerce.repositories.ShopsRepository;
 import dev.ecommerce.resolvers.shops.schema.FormCreateShopsInput;
+import dev.ecommerce.resolvers.shops.schema.FormUpdateShops;
 import dev.ecommerce.shared.errors.CustomMessageError;
+import dev.ecommerce.shared.resources.Headers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -48,29 +52,6 @@ public class ShopsResolver {
         }
 
     }
-//    @MutationMapping
-//    @Transactional
-//    public Map<String, String> updateShop(@Argument @Valid FormUpdateShops form){
-//        HashMap<String, String> res = new HashMap<>();
-//
-//        try {
-//            Shops shopsFromDB = shopsRepository.findByName(form.getName());
-//            shopsFromDB.setName(form.getName());
-//            shopsFromDB.setAddress(form.getAddress());
-//            shopsFromDB.setPhoneNumber(form.getPhoneNumber());
-//            shopsFromDB.setLogo(form.getLogo());
-//            shopsFromDB.setBanner(form.getBanner());
-//            shopsFromDB.setStatus(form.getStatus());
-//            res.put("name", shopsFromDB.getName());
-//            res.put("Address", shopsFromDB.getAddress());
-//            res.put("PhoneNumber", shopsFromDB.getPhoneNumber());
-//            res.put("Logo", shopsFromDB.getLogo());
-//            res.put("Banner", shopsFromDB.getBanner());
-//            res.put(("Status"), shopsFromDB.getStatus());
-//            return res;
-//        }catch (Error err){
-//            throw new CustomMessageError(err.getMessage());
-//        }
-//    }
+
 
 }
