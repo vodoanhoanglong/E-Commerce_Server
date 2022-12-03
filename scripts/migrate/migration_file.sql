@@ -17,8 +17,6 @@ create table users
     updatedAt   timestamp    default current_timestamp,
     createdBy   nvarchar2(36),
     updatedBy   nvarchar2(36),
-    role        nvarchar2(30)  default 'user'
-);
 
 CREATE OR REPLACE TRIGGER users_trigger
     BEFORE
