@@ -1,7 +1,10 @@
 package dev.ecommerce.resolvers.shops.schema;
 
-public class FormCreateShopsInput {
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+public class FormCreateShopsInput {
     public String getId() {
         return id;
     }
@@ -58,7 +61,7 @@ public class FormCreateShopsInput {
         this.status = status;
     }
 
-    public FormCreateShopsInput(String id, String name, String address, String phoneNumber, String logo, String banner, String status) {
+    public FormCreateShopsInput(String id,String name, String address, String phoneNumber, String logo, String banner, String status) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -69,10 +72,20 @@ public class FormCreateShopsInput {
     }
 
     String id;
+    @NotNull
+    @NotEmpty
     String name;
+    @NotNull
+    @NotEmpty
     String address;
+    @NotNull
+    @NotEmpty
+    @NotBlank
     String phoneNumber;
+
     String logo;
     String banner;
+    @NotNull
+    @NotEmpty
     String status;
 }

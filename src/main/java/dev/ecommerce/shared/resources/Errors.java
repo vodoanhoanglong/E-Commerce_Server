@@ -4,12 +4,8 @@ public enum Errors {
     PermissionDenied("permission_denied", "Không có quyền truy cập"),
     UserNotFound("user_not_found", "Không tìm thấy người dùng"),
     ProductAlreadyExist("product_already_exist", "Sản phẩm đã tồn tại!"),
-<<<<<<< Updated upstream
-    CategoriesAlreadyExist("categories_already_exist", "Danh mục đã tồn tại!");
-=======
     CategoriesAlreadyExist("categories_already_exist", "Danh mục đã tồn tại!"),
     OldPasswordNotCorrect("old_password_not_correct","Mật khẩu cũ không đúng");
->>>>>>> Stashed changes
 
     private final String key;
     private final String value;
@@ -26,4 +22,3 @@ public enum Errors {
         return value;
     }
 }
-

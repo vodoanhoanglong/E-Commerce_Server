@@ -7,16 +7,16 @@ input FormCreateUserInput {
     gender: String!
     address: String!
     bod: String!
-    avatar: String!
+    avatar: String
 }
 
 input FormUpdateUsersInput {
-    fullName: String!
-    address: String!
-    gender: String!
-    bod: String!
-    phoneNumber: String!
-    avatar: String!
+    fullName: String
+    address: String
+    gender: String
+    bod: String
+    phoneNumber: String
+    avatar: String
 }
 
 input  FormUpdatePassword {
@@ -42,13 +42,9 @@ type User {
     id: String
     fullName: String
     email: String
-<<<<<<< HEAD
-}
-=======
     gender: String
     phoneNumber: String
     bod: String
     address: String
     avatar: String
 }
->>>>>>> 90b97977985b2bbc0d6dc4608af63dbefdd3bd5d

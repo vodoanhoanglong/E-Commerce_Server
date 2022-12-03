@@ -35,11 +35,11 @@ public class ShopsResolver {
     }
     @MutationMapping
     @Transactional
-    public Map<String, Object> createShops(@Argument @Valid FormCreateShopsInput formShops){
+    public Map<String, Object> createShops(@Argument @Valid FormCreateShopsInput form){
         try {
             HashMap<String, Object> res = new HashMap<>();
             UUID id = UUID.randomUUID();
-            Shops addShop = new Shops(id.toString(),formShops.getName(), formShops.getAddress(),formShops.getPhoneNumber() , formShops.getLogo(),formShops.getBanner(),formShops.getStatus());
+            Shops addShop = new Shops(id.toString(),form.getName(), form.getAddress(),form.getPhoneNumber() , form.getLogo(),form.getBanner(),form.getStatus());
             entityManager.persist(addShop);
             res.put("isSuccess", true);
             return res;
@@ -50,17 +50,17 @@ public class ShopsResolver {
     }
 //    @MutationMapping
 //    @Transactional
-//    public Map<String, String> updateShop(@Argument @Valid FormCreateShops formShops){
+//    public Map<String, String> updateShop(@Argument @Valid FormUpdateShops form){
 //        HashMap<String, String> res = new HashMap<>();
 //
 //        try {
-//            Shops shopsFromDB = shopsRepository.findByName(formShops.getName());
-//            shopsFromDB.setName(formShops.getName());
-//            shopsFromDB.setAddress(formShops.getAddress());
-//            shopsFromDB.setPhoneNumber(formShops.getPhoneNumber());
-//            shopsFromDB.setLogo(formShops.getLogo());
-//            shopsFromDB.setBanner(formShops.getBanner());
-//            shopsFromDB.setStatus(formShops.getStatus());
+//            Shops shopsFromDB = shopsRepository.findByName(form.getName());
+//            shopsFromDB.setName(form.getName());
+//            shopsFromDB.setAddress(form.getAddress());
+//            shopsFromDB.setPhoneNumber(form.getPhoneNumber());
+//            shopsFromDB.setLogo(form.getLogo());
+//            shopsFromDB.setBanner(form.getBanner());
+//            shopsFromDB.setStatus(form.getStatus());
 //            res.put("name", shopsFromDB.getName());
 //            res.put("Address", shopsFromDB.getAddress());
 //            res.put("PhoneNumber", shopsFromDB.getPhoneNumber());

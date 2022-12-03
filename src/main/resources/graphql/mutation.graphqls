@@ -1,11 +1,4 @@
 type Mutation {
-<<<<<<< Updated upstream
-    createUser(form: FormCreateUserInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
-    login(form: FormLoginInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
-    createNewProduct(product: ProductReqBody!): ProductMutationRes @hasRoles(roles: [admin user])
-#    updateShop(formShops: FormCreateshops!): FormOutputCreateShops
-    createShops(shopsForm: FormCreateShopInput!): FormOutputCreateShops @hasRoles(roles: [admin user anonymous])
-=======
     createUser(form: FormCreateUserInput!): FormOutputCreateUser
     @hasRoles(roles: [anonymous])
     login(form: FormLoginInput!): FormOutputCreateUser
@@ -32,5 +25,5 @@ type Mutation {
 
     createOrder(form: FormCreateOrder!): CreateOrderOutput
     @hasRoles(roles: [user])
->>>>>>> Stashed changes
+
 }

@@ -31,8 +31,6 @@ public class Categories {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-<<<<<<< Updated upstream
-=======
     public Categories (String alias, String name, String description){
         this.alias = alias;
         this.name = name;
@@ -42,7 +40,6 @@ public class Categories {
     public Categories (){
 
     }
->>>>>>> Stashed changes
 
     public String getAlias() {
         return this.alias;
