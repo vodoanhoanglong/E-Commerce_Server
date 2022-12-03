@@ -44,15 +44,16 @@ public class Products {
     @Column(name = "SHOPID")
     private String shopId;
 
+    @Column(name= "CATEGORYALIAS")
+    private String categoryAlias;
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "PRODUCTID")
     private List<ProductImages> images;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ALIAS")
+    @JoinColumn(name = "CATEGORYALIAS", insertable = false, updatable = false)
     private Categories category;
-
-
 
     public Products() {
     }
@@ -161,5 +162,21 @@ public class Products {
 
     public void setImages(List<ProductImages> images) {
         this.images = images;
+    }
+
+    public String getCategoryAlias() {
+        return categoryAlias;
+    }
+
+    public void setCategoryAlias(String categoryAlias) {
+        this.categoryAlias = categoryAlias;
+    }
+
+    public Categories getCategory() {
+        return category;
+    }
+
+    public void setCategory(Categories category) {
+        this.category = category;
     }
 }

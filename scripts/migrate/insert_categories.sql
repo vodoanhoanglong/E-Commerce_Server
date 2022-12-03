@@ -1,84 +1,84 @@
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('men_clothes', 'th??i trang nam','qu�?n a?o da?nh cho nam');
+    ('men_clothes', 'thời trang nam','quần áo dành cho nam');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('woman_clothes', 'th??i trang n??','qu�?n a?o da?nh cho n??');
+    ('woman_clothes', 'thời trang nữ','quần áo dành cho nữ');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('phone_and_accessory', '?i�?n thoa?i va? phu? ki�?n','ca?c loa?i ?i�?n thoa?i va? phu? ki�?n ?i ke?m');
+    ('phone_and_accessory', 'điện thoại và phụ kiện','các loại điện thoại và phụ kiện đi kèm');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('electronic_device', 'thi�?t bi? ?i�?n t??','ti vi, tu? la?nh, ?�?ng h�?, ...');
+    ('electronic_device', 'thiết bị điện tử','ti vi, tủ lạnh, máy giặt, đồng hồ, ...');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('computer_laptop', 'ma?y ti?nh va? lap top','ma?y ti?nh va? laptop');
+    ('computer_laptop', 'máy tính và laptop','máy tính và laptop');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('camera', 'ma?y a?nh','ma?y a?nh th�ng minh');
+    ('camera', 'máy ảnh','máy ảnh');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('watch', '?�?ng h�?','?�?ng h�?');
+    ('watch', 'đồng hồ','đồng hồ');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('men_shoes', 'gia?y de?p nam','gia?y de?p nam');
+    ('men_shoes', 'gia?y de?p nam','gia?y de?p nam');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('women_shoes', 'gia?y de?p n??','gia?y de?p n??');
+    ('women_shoes', 'giày dép nam','giày dép nam');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('household_appliances', 'thi�?t bi? gia du?ng','n�?i, cha?o, n�?i c?m ?i�?n');
+    ('household_appliances', 'thiết bị gia dụng','nồi, niêu, xoong, chảo, ...');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('cosmetic', 'my? ph�?m','my? ph�?m la?m ?e?p');
+    ('cosmetic', 'mỹ phẩm','dụng cụ làm đẹp');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('medicine', 'thu�?c','thu�?c');
+    ('medicine', 'thuốc','thuốc chữa bệnh');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('woman_wallet_bag', 'tu?i vi? n??','tu?i xa?ch, vi? da n??');
+    ('woman_wallet_bag', 'túi','túi xách, ví da, ...');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('jewelry_and_accessories', 'trang s??c va? phu? ki�?n n??','d�y chuy�?n, nh�?n, ki?nh');
+    ('jewelry_and_accessories', 'trang sức và phụ kiện','dây chuyền, nhẫn, kính, ...');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('book_online', 'sa?ch online','sa?ch');
+    ('book_online', 'sách','sách doanh nhân thành đạt ko làm mà đòi có ăn');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('men_wallet_backpack', 'tu?i va? balo nam','balo, tu?i da?nh cho nam');
+    ('men_wallet_backpack', 'túi và balo nam','túi và balo nam dành cho nữ');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-('toy', '?�? ch?i','?�? ch?i');
+
