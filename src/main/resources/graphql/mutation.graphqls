@@ -1,7 +1,36 @@
 type Mutation {
+<<<<<<< Updated upstream
     createUser(form: FormCreateUserInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
     login(form: FormLoginInput!): FormOutputCreateUser @hasRoles(roles: [anonymous])
     createNewProduct(product: ProductReqBody!): ProductMutationRes @hasRoles(roles: [admin user])
 #    updateShop(formShops: FormCreateshops!): FormOutputCreateShops
     createShops(shopsForm: FormCreateShopInput!): FormOutputCreateShops @hasRoles(roles: [admin user anonymous])
+=======
+    createUser(form: FormCreateUserInput!): FormOutputCreateUser
+    @hasRoles(roles: [anonymous])
+    login(form: FormLoginInput!): FormOutputCreateUser
+    @hasRoles(roles: [anonymous])
+
+    createCategory(form: FormCreateCategoryInput!): FormOutputCategory
+    @hasRoles(roles: [admin, user])
+    updateCategory(form: FormCreateCategoryInput!): FormOutputCategory
+    @hasRoles(roles: [admin, user])
+    updateUsers(form: FormUpdateUsersInput!): User @hasRoles(roles: [admin, user])
+    updatePasswordUsers(form: FormUpdatePassword!): FormOutPutUpdatePassword
+    @hasRoles(roles: [admin, user])
+
+    createProduct(data: ProductReqBody!): ProductMutationRes
+    @hasRoles(roles: [admin, user])
+    updateProductQuantity(productId: String!, value: Int!): ProductMutationRes
+    @hasRoles(roles: [admin, user])
+    updateProductInfo(
+        productId: String!
+        data: ProductReqBody!
+    ): ProductMutationRes @hasRoles(roles: [admin, user])
+    deleteProduct(productId: String!): ProductMutationRes
+    @hasRoles(roles: [admin, user])
+
+    createOrder(form: FormCreateOrder!): CreateOrderOutput
+    @hasRoles(roles: [user])
+>>>>>>> Stashed changes
 }

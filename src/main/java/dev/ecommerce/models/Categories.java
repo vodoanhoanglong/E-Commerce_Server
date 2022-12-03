@@ -1,15 +1,16 @@
 package dev.ecommerce.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "CATEGORIES")
 public class Categories {
     @Id
-    @Column(name = "ALIAS")
+    @Column(name = "ALIAS", unique = true)
     private String alias;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", unique = true)
     private String name;
 
     @Column(name = "DESCRIPTION")
@@ -30,6 +31,18 @@ public class Categories {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
+<<<<<<< Updated upstream
+=======
+    public Categories (String alias, String name, String description){
+        this.alias = alias;
+        this.name = name;
+        this.description = description;
+    }
+
+    public Categories (){
+
+    }
+>>>>>>> Stashed changes
 
     public String getAlias() {
         return this.alias;
@@ -94,4 +107,5 @@ public class Categories {
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
     }
+
 }

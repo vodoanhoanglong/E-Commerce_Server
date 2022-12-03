@@ -1,6 +1,7 @@
 package dev.ecommerce.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ORDERS")
@@ -33,8 +34,9 @@ public class Orders {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-    @Column(name = "SHOPID")
-    private String shopId;
+    @ManyToMany(targetEntity = OrderDetails.class)
+    @JoinColumn(name = "ORDERID")
+    private List<OrderDetails> orderDetails;
 
     public String getId() {
         return this.id;
@@ -108,11 +110,11 @@ public class Orders {
         this.updatedBy = updatedBy;
     }
 
-    public String getShopId() {
-        return this.shopId;
+    public List<OrderDetails> getOrderDetails() {
+        return orderDetails;
     }
 
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
+    public void setOrderDetails(List<OrderDetails> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

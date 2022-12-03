@@ -1,6 +1,14 @@
 spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
+  graphql:
+    graphiql:
+      enabled: true
+    cors:
+      allowed-origins: '*'
+    schema:
+      printer:
+        enabled: true
   jpa:
     show-sql: true
     hibernate:
