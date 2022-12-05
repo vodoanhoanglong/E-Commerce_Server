@@ -2,22 +2,15 @@ input FormCreateShopInput {
     name: String!
     address: String!
     phoneNumber: String!
-    logo: String!
-    banner: String!
-    status: String!
+    logo: String
+    banner: String
 }
-#input  FormUpdateShop {
-#    id:String!
-#    name: String!
-#    address: String!
-#    phoneNumber: String!
-#    logo: String!
-#    banner: String!
-#    status: String!
-#
-#}
-type FormOutputCreateShops {
-    isSuccess: Boolean!
+input  FormUpdateShop {
+    name: String
+    address: String
+    phoneNumber: String
+    logo: String
+    banner: String
 }
 
 type Shops {
@@ -28,4 +21,5 @@ type Shops {
     logo: String
     banner: String
     status: String
+    owner: User
 }

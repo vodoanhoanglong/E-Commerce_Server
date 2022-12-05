@@ -4,15 +4,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class FormCreateShopsInput {
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
+public class FormCreateShop {
     public String getName() {
         return name;
     }
@@ -53,25 +45,15 @@ public class FormCreateShopsInput {
         this.banner = banner;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public FormCreateShopsInput(String id,String name, String address, String phoneNumber, String logo, String banner, String status) {
-        this.id = id;
+    public FormCreateShop(String name, String address, String phoneNumber, String logo, String banner) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.logo = logo;
         this.banner = banner;
-        this.status = status;
     }
 
-    String id;
     @NotNull
     @NotEmpty
     String name;
@@ -85,7 +67,4 @@ public class FormCreateShopsInput {
 
     String logo;
     String banner;
-    @NotNull
-    @NotEmpty
-    String status;
 }

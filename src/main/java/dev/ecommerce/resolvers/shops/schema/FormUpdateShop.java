@@ -4,25 +4,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class FormUpdateShops {
-    public FormUpdateShops(String id, String name, String address, String phoneNumber, String logo, String banner, String status) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.logo = logo;
-        this.banner = banner;
-        this.status = status;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
+public class FormUpdateShop {
     public String getName() {
         return name;
     }
@@ -41,6 +23,14 @@ public class FormUpdateShops {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -63,29 +53,26 @@ public class FormUpdateShops {
         this.banner = banner;
     }
 
-    public String getStatus() {
-        return status;
+    public FormUpdateShop(String name, String address, String phoneNumber, String logo, String banner, String shopId) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.logo = logo;
+        this.banner = banner;
+        this.shopId = shopId;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    String id;
-    @NotNull
-    @NotEmpty
     String name;
-    @NotNull
-    @NotEmpty
+
     String address;
-    @NotNull
-    @NotEmpty
-    @NotBlank
+
     String phoneNumber;
 
     String logo;
     String banner;
-    @NotNull
+
+    @NotBlank
     @NotEmpty
-    String status;
+    @NotNull
+    String shopId;
 }

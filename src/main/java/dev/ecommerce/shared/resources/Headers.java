@@ -2,7 +2,6 @@ package dev.ecommerce.shared.resources;
 
 public enum Headers {
     Authorization("authorization", "authorization"),
-    CurrentShop("current_shop", "currentshop"),
     CurrentUser("current_user", "currentUser");
 
     private final String key;
