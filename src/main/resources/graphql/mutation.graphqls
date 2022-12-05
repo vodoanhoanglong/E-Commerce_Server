@@ -25,4 +25,8 @@ type Mutation {
 
     createOrder(form: FormCreateOrder!): String
     @hasRoles(roles: [user])
+    createShop(form: FormCreateShopInput!): String
+    @hasRoles(roles: [admin, user])
+    updateShops(form: FormUpdateShop!): String @hasRoles(roles: [admin, user])
+
 }

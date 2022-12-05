@@ -6,7 +6,7 @@ input ProductReqBody {
 }
 
 input FilterProductList {
-    categoryAliases: [String]!
+    categoryAliases: [String]
     paginate: PaginationInput
 }
 

@@ -6,7 +6,8 @@ public enum Errors {
     ProductAlreadyExist("product_already_exist", "Sản phẩm đã tồn tại!"),
     CategoriesAlreadyExist("categories_already_exist", "Danh mục đã tồn tại!"),
     OldPasswordNotCorrect("old_password_not_correct","Mật khẩu cũ không đúng"),
-    ProductNotFound("product_not_found", "Không tìm thấy sản phẩm");
+    ProductNotFound("product_not_found", "Không tìm thấy sản phẩm"),
+    ShopNotFound("shop_not_found", "Không tìm thấy cửa hàng");
 
     private final String key;
     private final String value;
