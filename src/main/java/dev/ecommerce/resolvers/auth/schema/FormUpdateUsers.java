@@ -71,22 +71,16 @@ public class FormUpdateUsers {
     }
 
     String id;
-    @NotEmpty
-    @NotNull
+
     String fullName;
-    @NotEmpty
-    @NotNull
+
     String address;
-    @NotEmpty
-    @NotNull
+
     String bod;
-    @NotEmpty
-    @NotNull
+
     String gender;
-    @NotEmpty
-    @NotNull
+
     String phoneNumber;
-    @NotEmpty
-    @NotNull
+
     String avatar;
 }

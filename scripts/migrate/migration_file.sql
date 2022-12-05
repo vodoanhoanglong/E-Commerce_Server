@@ -17,7 +17,7 @@ create table users
     updatedAt   timestamp    default current_timestamp,
     createdBy   nvarchar2(36),
     updatedBy   nvarchar2(36),
-    role        varchar(30)  default 'user'
+    role        nvarchar(30)  default 'user'
 );
 
 CREATE OR REPLACE TRIGGER users_trigger
@@ -143,11 +143,6 @@ create table orders
     id         nvarchar2(36) not null
         constraint orders_pk primary key,
     totalMoney double precision,
-    deliveryAddress nvarchar2(500) not null,
-    deliveryStatus nvarchar2(50) default 'pending',
-    isPaid INTEGER not null,
-    paymentAt TIMESTAMP,
-    paymentType nvarchar2(50),
     quantity   int,
     discount   float,
     status     nvarchar2(20) default 'active',
@@ -176,7 +171,7 @@ create table order_details
     orderId   nvarchar2(36)
         constraint order_details_orders_orderId_fk references ORDERS (ID),
     productId nvarchar2(36)
-        constraint order_details_products_productId_fk references PRODUCTS (ID),
+        constraint order_details_products_productId_fk references USERS (ID),
     status    nvarchar2(20) default 'active',
     createdAt timestamp    default current_timestamp,
     updatedAt timestamp    default current_timestamp,
@@ -197,3 +192,4 @@ UPDATE
 begin
     :NEW.updatedAt := current_timestamp;
 end;
+
