@@ -1,5 +1,6 @@
 package dev.ecommerce.repositories;
 
+import dev.ecommerce.models.Orders;
 import dev.ecommerce.models.Products;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
@@ -17,4 +18,5 @@ public interface ProductsRepository extends JpaRepository<Products, String>, Jpa
     @NotNull Page<Products> findAllByCategoryAliasIn(List<String> categoryAliases, @NotNull Pageable pageable);
     Products findProductsByName(String productName);
     Products getProductsById(@NotNull String productId);
+    List<Products> findAllProductByIdIn(List<String> productIds);
 }
