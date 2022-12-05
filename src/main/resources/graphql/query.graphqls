@@ -1,5 +1,6 @@
 type Query {
     getUsers: [User]
+    getShopsListOfOwner:  [Shops] @hasRoles(roles: [user admin])
     getCurrentUser: User @hasRoles(roles: [
         user
         admin
