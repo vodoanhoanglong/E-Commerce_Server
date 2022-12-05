@@ -23,6 +23,6 @@ type Mutation {
     deleteProduct(productId: String!): ProductMutationRes
     @hasRoles(roles: [admin, user])
 
-    createOrder(form: FormCreateOrder!): CreateOrderOutput
+    createOrder(form: FormCreateOrder!): String
     @hasRoles(roles: [user])
 }

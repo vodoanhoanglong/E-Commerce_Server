@@ -1,8 +1,10 @@
 input FormCreateOrder {
     productIds: [String]
+    deliveryAddress: String
+    paymentType: String
 }
 
-type CreateOrderOutput {
+type Order {
     id: String
     totalMoney: String
     quantity: Int
@@ -15,4 +17,9 @@ type CreateOrderOutput {
 type OrderDetail {
     id: String
     product: Product
+}
+
+type OrderListPaginate {
+    data: [Order]
+    pagination: PaginationData
 }

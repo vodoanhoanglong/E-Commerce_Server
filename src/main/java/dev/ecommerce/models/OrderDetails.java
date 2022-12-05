@@ -34,15 +34,25 @@ public class OrderDetails {
     private String shopId;
 
     @ManyToOne(targetEntity = Products.class)
-    @JoinColumn(name = "ID", insertable = false, updatable = false)
+    @JoinColumn(name = "PRODUCTID", insertable = false, updatable = false)
     private Products product;
 
     @ManyToOne(targetEntity = Orders.class)
-    @JoinColumn(name = "ID", insertable = false, updatable = false)
+    @JoinColumn(name = "ORDERID", insertable = false, updatable = false)
     private Orders order;
 
     public Products getProduct() {
         return product;
+    }
+
+    public OrderDetails() {
+    }
+
+    public OrderDetails(String id, String orderId, String productId, String shopId) {
+        this.id = id;
+        this.orderId = orderId;
+        this.productId = productId;
+        this.shopId = shopId;
     }
 
     public void setProduct(Products product) {

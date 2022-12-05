@@ -1,6 +1,14 @@
 package dev.ecommerce.models;
 
+import dev.ecommerce.resolvers.order.schema.PaymentType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -14,7 +22,7 @@ public class Orders {
     private Float totalMoney;
 
     @Column(name = "QUANTITY")
-    private Long quantity;
+    private Integer quantity;
 
     @Column(name = "DISCOUNT")
     private Float discount;
@@ -34,8 +42,25 @@ public class Orders {
     @Column(name = "UPDATEDBY")
     private String updatedBy;
 
-    @ManyToMany(targetEntity = OrderDetails.class)
-    @JoinColumn(name = "ORDERID")
+    @Column(name = "DELIVERYADDRESS")
+    private String deliveryAddress;
+
+    @Column(name = "DELIVERYSTATUS")
+    @Generated(GenerationTime.INSERT)
+    private String deliveryStatus;
+
+    @Column(name = "ISPAID")
+    private int isPaid;
+
+    @Column(name = "PAYMENTAT")
+    private java.sql.Timestamp paymentAt;
+
+    @Column(name = "PAYMENTTYPE")
+    private String paymentType;
+
+    @OneToMany(targetEntity = OrderDetails.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "ORDERID", insertable = false, updatable = false)
     private List<OrderDetails> orderDetails;
 
     public String getId() {
@@ -54,11 +79,11 @@ public class Orders {
         this.totalMoney = totalMoney;
     }
 
-    public Long getQuantity() {
+    public Integer getQuantity() {
         return this.quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -114,7 +139,63 @@ public class Orders {
         return orderDetails;
     }
 
+    public Orders() {
+    }
+
+    public Orders(String id, Float totalMoney, Integer quantity, Float discount, String deliveryAddress, int isPaid, Timestamp paymentAt, String paymentType, String createdBy) {
+        this.id = id;
+        this.totalMoney = totalMoney;
+        this.quantity = quantity;
+        this.discount = discount;
+        this.deliveryAddress = deliveryAddress;
+        this.isPaid = isPaid;
+        this.paymentAt = paymentAt;
+        this.paymentType = paymentType;
+        this.createdBy = createdBy;
+    }
+
     public void setOrderDetails(List<OrderDetails> orderDetails) {
         this.orderDetails = orderDetails;
     }
+
+    public String getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
+    public String getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public void setDeliveryStatus(String deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
+    }
+
+    public int getIsPaid() {
+        return isPaid;
+    }
+
+    public void setIsPaid(int isPaid) {
+        this.isPaid = isPaid;
+    }
+
+    public Timestamp getPaymentAt() {
+        return paymentAt;
+    }
+
+    public void setPaymentAt(Timestamp paymentAt) {
+        this.paymentAt = paymentAt;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
 }
