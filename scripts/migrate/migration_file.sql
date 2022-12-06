@@ -150,6 +150,7 @@ create table orders
     isPaid          number         not null,
     paymentAt       timestamp,
     paymentType     nvarchar2(50),
+    shipCost        double precision,
     status          nvarchar2(20) default 'active',
     createdAt       timestamp     default current_timestamp,
     updatedAt       timestamp     default current_timestamp,
@@ -177,6 +178,7 @@ create table order_details
         constraint order_details_orders_orderId_fk references ORDERS (ID),
     productId nvarchar2(36)
         constraint order_details_products_productId_fk references USERS (ID),
+    quantity  int not null,
     status    nvarchar2(20) default 'active',
     createdAt timestamp     default current_timestamp,
     updatedAt timestamp     default current_timestamp,

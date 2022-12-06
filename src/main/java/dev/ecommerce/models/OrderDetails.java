@@ -33,6 +33,9 @@ public class OrderDetails {
     @Column(name = "SHOPID")
     private String shopId;
 
+    @Column(name = "QUANTITY")
+    private Long quantity;
+
     @ManyToOne(targetEntity = Products.class)
     @JoinColumn(name = "PRODUCTID", insertable = false, updatable = false)
     private Products product;
@@ -48,11 +51,13 @@ public class OrderDetails {
     public OrderDetails() {
     }
 
-    public OrderDetails(String id, String orderId, String productId, String shopId) {
+    public OrderDetails(String id, String orderId, String productId,
+                        String shopId, long quantity) {
         this.id = id;
         this.orderId = orderId;
         this.productId = productId;
         this.shopId = shopId;
+        this.quantity = quantity;
     }
 
     public void setProduct(Products product) {
@@ -137,5 +142,13 @@ public class OrderDetails {
 
     public void setShopId(String shopId) {
         this.shopId = shopId;
+    }
+
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
     }
 }

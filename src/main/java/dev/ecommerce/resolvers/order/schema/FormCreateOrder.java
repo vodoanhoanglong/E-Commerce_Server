@@ -1,20 +1,22 @@
 package dev.ecommerce.resolvers.order.schema;
 
+import dev.ecommerce.models.Products;
+
 import java.util.List;
 
 public class FormCreateOrder {
-    private final List<String> productIds;
+    private List<ProductOrder> products;
     private String deliveryAddress;
     private String paymentType;
 
-    public List<String> getProductIds() {
-        return productIds;
-    }
+    private int shipCost;
 
-    public FormCreateOrder(List<String> productIds, String deliveryAddress, String paymentType) {
-        this.productIds = productIds;
+    public FormCreateOrder(List<ProductOrder> products, String deliveryAddress,
+                           String paymentType, int shipCost) {
+        this.products = products;
         this.deliveryAddress = deliveryAddress;
         this.paymentType = paymentType;
+        this.shipCost = shipCost;
     }
 
     public String getDeliveryAddress() {
@@ -31,5 +33,47 @@ public class FormCreateOrder {
 
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
+    }
+
+    public int getShipCost() {
+        return shipCost;
+    }
+
+    public void setShipCost(int shipCost) {
+        this.shipCost = shipCost;
+    }
+
+    public List<ProductOrder> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductOrder> products) {
+        this.products = products;
+    }
+
+    public static class ProductOrder extends Products {
+        private String productId;
+        private Long quantity;
+
+        public ProductOrder(String productId, long quantity) {
+            this.productId = productId;
+            this.quantity = quantity;
+        }
+
+        public String getProductId() {
+            return productId;
+        }
+
+        public void setProductId(String productId) {
+            this.productId = productId;
+        }
+
+        public Long getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(long quantity) {
+            this.quantity = quantity;
+        }
     }
 }

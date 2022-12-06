@@ -52,35 +52,66 @@ public class OrderResolver {
     @Transactional
     public String createOrder(GraphQLContext context, @Argument @Valid FormCreateOrder form){
         try {
-            List<Products> productsList = productsRepository.findAllProductByIdIn(form.getProductIds());
+            List<String> productIds = new ArrayList<>();
+            for (FormCreateOrder.ProductOrder product : form.getProducts()) {
+                productIds.add(product.getProductId());
+            }
+            List<Products> productsList = productsRepository.findAllProductByIdIn(productIds);
             if (productsList.size() == 0)
                 throw new Error(Errors.ProductNotFound.getValue());
 
-            UUID orderId = UUID.randomUUID();
+            for (Products product : productsList) {
+                for (int j = 0; j < form.getProducts().size(); j++) {
+                    if (Objects.equals(product.getId(), form.getProducts().get(j).getProductId())) {
+                        if (product.getQuantityStore() < form.getProducts().get(j).getQuantity()) {
+                            throw new Error(Errors.ProductNotEnoughOnStore.getValue());
+                        }
+                        form.getProducts().get(j).setShopId(
+                                product.getShopId()
+                        );
+                        form.getProducts().get(j).setPrice(
+                                product.getPrice()
+                        );
+                    }
+                }
+            }
+
+            String orderId = UUID.randomUUID().toString();
 
             float totalMoney = 0;
-            for (Products value : productsList) {
-                totalMoney += value.getPrice();
+            int totalQuantity = 0;
+            for (FormCreateOrder.ProductOrder value : form.getProducts()) {
+                totalMoney += value.getPrice() * value.getQuantity();
+                totalQuantity += value.getQuantity();
             }
 
             int isPaid = form.getPaymentType().equals(PaymentType.Online.getType()) ? 1 : 0;
             Timestamp currTimestamp = isPaid == 1 ? new Timestamp(new Date().getTime()) : null;
             Users currentUser = context.get(Headers.CurrentUser.getValue());
-            Orders order = new Orders(orderId.toString(), totalMoney, productsList.size(), (float) 0,
+            Orders order = new Orders(orderId, totalMoney - form.getShipCost(), totalQuantity, (float) 0,
                    form.getDeliveryAddress() ,isPaid, currTimestamp,  form.getPaymentType(),
-                   currentUser.getId());
+                   currentUser.getId(), form.getShipCost());
             ordersRepository.save(order);
 
             List<OrderDetails> orderDetailsList = new ArrayList<>();
-            productsList.forEach(product -> {
+            form.getProducts().forEach(product -> {
                 UUID id = UUID.randomUUID();
-                OrderDetails orderDetail = new OrderDetails(id.toString(), order.getId(), product.getId(), product.getShopId());
+
+                OrderDetails orderDetail = new OrderDetails(id.toString(), order.getId(), product.getProductId(),
+                        product.getShopId(), product.getQuantity());
+
+                productsList.forEach(productDb -> {
+                    if(Objects.equals(productDb.getId(), product.getProductId())){
+                        productDb.setQuantityStore(productDb.getQuantityStore() - product.getQuantity());
+                    }
+                });
                 orderDetailsList.add(orderDetail);
             });
 
             orderDetailsRepository.saveAll(orderDetailsList);
+            productsRepository.saveAllAndFlush(productsList);
 
-            return "Create order successfully";
+            return orderId;
         }catch (Error err){
             throw new CustomMessageError(err.getMessage());
         }
