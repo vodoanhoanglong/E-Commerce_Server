@@ -126,21 +126,6 @@ VALUES
 INSERT INTO PRODUCTS
 (id,name,description,price,quantitystore,shopid,categoryalias)
 VALUES
-('l7334fe8-16d7-4e32-d176-f37b40603a80',N'quần lót nữ', N'quần lót nữ', 100000, 20, 'e7334fe8-14c7-4e32-a176-f37r40603a33', N'woman_clothes')
-
-INSERT INTO PRODUCTS
-(id,name,description,price,quantitystore,shopid,categoryalias)
-VALUES
-('g7334fe8-16d7-4e32-d176-f37b40603a80',N'Áo ngực', N'áo ngực ', 200000, 20, 'e7334fe8-14c7-4e32-a176-f37r40603a33', N'woman_clothes')
-
-INSERT INTO PRODUCTS
-(id,name,description,price,quantitystore,shopid,categoryalias)
-VALUES
-('m7334fe8-16d7-4e32-d176-f37b40603a80',N'Bộ nội y nữ', N'quần lót + áo ngực', 300000, 20, 'e7334fe8-14c7-4e32-a176-f37r40603a33', N'woman_clothes')
-
-INSERT INTO PRODUCTS
-(id,name,description,price,quantitystore,shopid,categoryalias)
-VALUES
 ('a7334fe8-16d7-4e32-d176-f37b40603a80',N'Áo khoác bomber', N'áo khoác', 200000, 20, 'e7334fe8-14c7-4e32-a176-f37r40603a33', N'woman_clothes')
 
 INSERT INTO PRODUCTS
