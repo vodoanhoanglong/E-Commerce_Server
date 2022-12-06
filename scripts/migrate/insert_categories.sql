@@ -36,12 +36,12 @@ VALUES
 INSERT INTO categories
 (alias, name, description)
 VALUES
-    ('men_shoes', 'gia?y de?p nam','gia?y de?p nam');
+    ('men_shoes', 'giày dép nam','giày dép nam');
 
 INSERT INTO categories
 (alias, name, description)
 VALUES
-    ('women_shoes', 'giày dép nam','giày dép nam');
+    ('women_shoes', 'giày dép nữ','giày dép nữ');
 
 INSERT INTO categories
 (alias, name, description)
@@ -78,7 +78,4 @@ INSERT INTO categories
 VALUES
     ('men_wallet_backpack', 'túi và balo nam','túi và balo nam dành cho nữ');
 
-INSERT INTO categories
-(alias, name, description)
-VALUES
 

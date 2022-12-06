@@ -247,3 +247,13 @@ INSERT INTO product_images
 (id,url,productid)
 VALUES
 ('q7334fe8-15c7-4e32-d176-f37b40603a56',N'https://firebasestorage.googleapis.com/v0/b/shoppingmall-db041.appspot.com/o/products%2Fv7334fe8-16d7-4e32-d176-f37b40603a80%2Fq7334fe8-15c7-4e32-d176-f37b40603a56.jfif?alt=media&token=e6006576-bc2f-4aff-a3e3-1430a8600a94', 'v7334fe8-16d7-4e32-d176-f37b40603a80')
+
+INSERT INTO product_images
+(id,url,productid)
+VALUES
+('q7334fe8-15c7-4e32-d176-f37b40603a57',N'https://firebasestorage.googleapis.com/v0/b/shoppingmall-db041.appspot.com/o/products%2Fk7334fe8-15c7-4e32-d176-f37b40603a7%2Fq7334fe8-15c7-4e32-d176-f37b40603a57.jfif?alt=media&token=4d09271a-e404-4342-bf9c-9f6843532d68', 'k7334fe8-15c7-4e32-d176-f37b40603a7')
+
+INSERT INTO product_images
+(id,url,productid)
+VALUES
+('q7334fe8-15c7-4e32-d176-f37b40603a58',N'https://firebasestorage.googleapis.com/v0/b/shoppingmall-db041.appspot.com/o/products%2Fk7334fe8-15c7-4e32-d176-f37b40603a7%2Fq7334fe8-15c7-4e32-d176-f37b40603a58.jfif?alt=media&token=5b804db8-a18a-4efd-b85a-65ecfd3a98dc', 'k7334fe8-15c7-4e32-d176-f37b40603a7')
