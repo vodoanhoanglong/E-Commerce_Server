@@ -13,11 +13,11 @@ create table users
     bod         nvarchar2(20),
     phoneNumber nvarchar2(20),
     status      nvarchar2(20) default 'active',
-    createdAt   timestamp    default current_timestamp,
-    updatedAt   timestamp    default current_timestamp,
+    createdAt   timestamp     default current_timestamp,
+    updatedAt   timestamp     default current_timestamp,
     createdBy   nvarchar2(36),
     updatedBy   nvarchar2(36),
-    role        nvarchar(30)  default 'user'
+    role        nvarchar2(30) default 'user'
 );
 
 CREATE OR REPLACE TRIGGER users_trigger
@@ -37,8 +37,8 @@ create table categories
     name        nvarchar2(200) unique,
     description nvarchar2(500),
     status      nvarchar2(20) default 'active',
-    createdAt   timestamp    default current_timestamp,
-    updatedAt   timestamp    default current_timestamp,
+    createdAt   timestamp     default current_timestamp,
+    updatedAt   timestamp     default current_timestamp,
     createdBy   nvarchar2(36),
     updatedBy   nvarchar2(36)
 );
@@ -63,8 +63,8 @@ create table shops
     logo        nvarchar2(500),
     banner      nvarchar2(500),
     status      nvarchar2(20) default 'active',
-    createdAt   timestamp    default current_timestamp,
-    updatedAt   timestamp    default current_timestamp,
+    createdAt   timestamp     default current_timestamp,
+    updatedAt   timestamp     default current_timestamp,
     createdBy   nvarchar2(36)
         constraint shops_users_createdBy_fk references USERS (ID),
     updatedBy   nvarchar2(36)
@@ -90,8 +90,8 @@ create table products
     price         float,
     quantityStore int,
     status        nvarchar2(20) default 'active',
-    createdAt     timestamp    default current_timestamp,
-    updatedAt     timestamp    default current_timestamp,
+    createdAt     timestamp     default current_timestamp,
+    updatedAt     timestamp     default current_timestamp,
     createdBy     nvarchar2(36)
         constraint products_users_createdBy_fk references USERS (ID),
     updatedBy     nvarchar2(36)
@@ -118,8 +118,8 @@ create table product_images
         constraint product_images_pk primary key,
     url       nvarchar2(500),
     status    nvarchar2(20) default 'active',
-    createdAt timestamp    default current_timestamp,
-    updatedAt timestamp    default current_timestamp,
+    createdAt timestamp     default current_timestamp,
+    updatedAt timestamp     default current_timestamp,
     createdBy nvarchar2(36)
         constraint product_images_users_createdBy_fk references USERS (ID),
     updatedBy nvarchar2(36)
@@ -140,17 +140,22 @@ end;
 
 create table orders
 (
-    id         nvarchar2(36) not null
+    id              nvarchar2(36)  not null
         constraint orders_pk primary key,
-    totalMoney double precision,
-    quantity   int,
-    discount   float,
-    status     nvarchar2(20) default 'active',
-    createdAt  timestamp    default current_timestamp,
-    updatedAt  timestamp    default current_timestamp,
-    createdBy  nvarchar2(36)
+    totalMoney      double precision,
+    quantity        int,
+    discount        float,
+    deliveryAddress nvarchar2(500) not null,
+    deliveryStatus  nvarchar2(50) default 'pending',
+    isPaid          number         not null,
+    paymentAt       timestamp,
+    paymentType     nvarchar2(50),
+    status          nvarchar2(20) default 'active',
+    createdAt       timestamp     default current_timestamp,
+    updatedAt       timestamp     default current_timestamp,
+    createdBy       nvarchar2(36)
         constraint orders_users_createdBy_fk references USERS (ID),
-    updatedBy  nvarchar2(36)
+    updatedBy       nvarchar2(36)
         constraint orders_users_updatedBy_fk references USERS (ID)
 );
 
@@ -173,8 +178,8 @@ create table order_details
     productId nvarchar2(36)
         constraint order_details_products_productId_fk references USERS (ID),
     status    nvarchar2(20) default 'active',
-    createdAt timestamp    default current_timestamp,
-    updatedAt timestamp    default current_timestamp,
+    createdAt timestamp     default current_timestamp,
+    updatedAt timestamp     default current_timestamp,
     createdBy nvarchar2(36)
         constraint order_details_users_createdBy_fk references USERS (ID),
     updatedBy nvarchar2(36)
