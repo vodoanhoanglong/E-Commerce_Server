@@ -151,4 +151,4 @@ VALUES
 INSERT INTO PRODUCTS
 (id,name,description,price,quantitystore,shopid,categoryalias)
 VALUES
-('b7334fe8-16d7-4e32-d176-f37b40603a80',N'Váy sơ mi', N'váy sơ mi', 150000, 20, 'e7334fe8-14c7-4e32-a176-f37r40603a33', N'woman_clothes')
+('v7334fe8-16d7-4e32-d176-f37b40603a80',N'Váy sơ mi', N'váy sơ mi', 150000, 20, 'e7334fe8-14c7-4e32-a176-f37r40603a33', N'woman_clothes')
