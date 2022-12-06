@@ -58,6 +58,10 @@ public class Orders {
     @Column(name = "PAYMENTTYPE")
     private String paymentType;
 
+    @Column(name = "SHIPCOST")
+    private int shipCost;
+
+
     @OneToMany(targetEntity = OrderDetails.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "ORDERID", insertable = false, updatable = false)
@@ -142,7 +146,9 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(String id, Float totalMoney, Integer quantity, Float discount, String deliveryAddress, int isPaid, Timestamp paymentAt, String paymentType, String createdBy) {
+    public Orders(String id, Float totalMoney, Integer quantity, Float discount,
+                  String deliveryAddress, int isPaid, Timestamp paymentAt,
+                  String paymentType, String createdBy, int shipCost) {
         this.id = id;
         this.totalMoney = totalMoney;
         this.quantity = quantity;
@@ -150,6 +156,7 @@ public class Orders {
         this.deliveryAddress = deliveryAddress;
         this.isPaid = isPaid;
         this.paymentAt = paymentAt;
+        this.shipCost = shipCost;
         this.paymentType = paymentType;
         this.createdBy = createdBy;
     }
@@ -198,4 +205,11 @@ public class Orders {
         this.paymentType = paymentType;
     }
 
+    public int getShipCost() {
+        return shipCost;
+    }
+
+    public void setShipCost(int shipCost) {
+        this.shipCost = shipCost;
+    }
 }

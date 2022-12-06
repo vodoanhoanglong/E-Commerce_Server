@@ -1,13 +1,23 @@
+input ProductOrder {
+    productId: String
+    quantity: Int
+}
+
 input FormCreateOrder {
-    productIds: [String]
-    deliveryAddress: String
-    paymentType: String
+    products: [ProductOrder]
+    deliveryAddress: String!
+    paymentType: String!
+    shipCost: Int
 }
 
 type Order {
     id: String
     totalMoney: String
     quantity: Int
+    deliveryAddress: String
+    deliveryStatus: String
+    paymentType: String
+    shipCost: Int
     discount: Int
     createdAt: String
     createdBy: String
@@ -16,6 +26,7 @@ type Order {
 
 type OrderDetail {
     id: String
+    quantity: Int
     product: Product
 }
 
