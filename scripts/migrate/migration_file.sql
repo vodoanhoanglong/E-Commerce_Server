@@ -177,7 +177,7 @@ create table order_details
     orderId   nvarchar2(36)
         constraint order_details_orders_orderId_fk references ORDERS (ID),
     productId nvarchar2(36)
-        constraint order_details_products_productId_fk references USERS (ID),
+        constraint order_details_products_productId_fk references PRODUCTS (ID),
     quantity  int not null,
     status    nvarchar2(20) default 'active',
     createdAt timestamp     default current_timestamp,
